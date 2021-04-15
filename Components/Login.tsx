@@ -9,17 +9,23 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 
+import { withRouter } from 'react-router-dom'
+
+
 type LoginProps = {
-  updateToken: any;
-  token: string;
+  updateToken: any
+  token: string
+  history: any
+  location: any
+  match: any
 };
 
 type LoginState = {
-  email: string;
-  password: string;
+  email: string
+  password: string
 };
 
-export default class Login extends React.Component<
+class Login extends React.Component<
   LoginProps,
   LoginState
 > {
@@ -55,7 +61,10 @@ export default class Login extends React.Component<
       body: JSON.stringify(body),
     })
       .then((response) => response.json())
-      .then((responseObj) => this.props.updateToken(responseObj.sessionToken));
+      .then((responseObj) => this.props.updateToken(responseObj.sessionToken))
+      .then(() => this.props.history.push('/dashboard'))
+
+
   };
 
   render() {
@@ -118,3 +127,5 @@ export default class Login extends React.Component<
     );
   }
 }
+
+export default withRouter<LoginProps, any>(Login) 

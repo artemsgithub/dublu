@@ -9,17 +9,23 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 
+import { withRouter } from 'react-router-dom'
+
+
 type RegisterProps = {
-  updateToken: any;
-  token: string;
+  updateToken: any
+  token: string
+  history: any
+  location: any
+  match: any
 };
 
 type RegisterState = {
-  email: string;
-  password: string;
+  email: string
+  password: string
 };
 
-export default class Register extends React.Component<
+ class Register extends React.Component<
   RegisterProps,
   RegisterState
 > {
@@ -55,7 +61,8 @@ export default class Register extends React.Component<
       body: JSON.stringify(body),
     })
       .then((response) => response.json())
-      .then((responseObj) => this.props.updateToken(responseObj.sessionToken));
+      .then((responseObj) => this.props.updateToken(responseObj.sessionToken))
+      .then(() => this.props.history.push('/dashboard'))
   };
 
   render() {
@@ -118,3 +125,5 @@ export default class Register extends React.Component<
     );
   }
 }
+
+export default withRouter<RegisterProps, any>(Register) 

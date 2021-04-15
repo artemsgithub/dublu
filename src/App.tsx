@@ -3,38 +3,37 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+ 
 } from "react-router-dom";
 
 import Logo from '../Assets/Logo'
 
 import Login from '../Components/Login'
 import Register from '../Components/Register'
-
-
+import Dashboard from '../Components/Dashboard'
+import Protector from '../Components/Protector'
 
 type setState ={
-  token: string
-  newToken: string
+  sessionToken: string
 }
 
 class App extends Component<{}, setState> {
   constructor(props: string) {
     super(props) 
     this.state={
-      token: '',
-      newToken: '',
+      sessionToken: '',
     }
   }
 
 
   setToken = (token: string) => {
       if (token) {
-        this.setState({ token: token });
+        this.setState({ sessionToken: token });
         localStorage.setItem("token", token);
         console.log(token)
       } else {
-        this.setState({ token: localStorage.getItem("token") || "" });
+        this.setState({ sessionToken: localStorage.getItem("token") || "" });
       }
     };
 
@@ -42,6 +41,7 @@ class App extends Component<{}, setState> {
       newToken: string,
     ) => {
       localStorage.setItem("token", newToken);
+      this.setState({ sessionToken: newToken }); //set the state w/new token
       console.log(newToken)
     };
     
@@ -71,13 +71,17 @@ class App extends Component<{}, setState> {
           <Route exact path="/register">
             <Register 
             updateToken={this.updateToken}
-            token={this.state.token}/>
+            token={this.state.sessionToken}/>
           </Route>
           <Route exact path="/login">
             <Login 
             updateToken={this.updateToken}
-            token={this.state.token}/>
+            token={this.state.sessionToken}/>
           </Route>
+          <Protector sessionToken={this.state.sessionToken} exact path="/dashboard">
+            <Dashboard 
+            />
+          </Protector>
  
         </Switch>
       </div>
