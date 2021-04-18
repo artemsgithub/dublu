@@ -9,7 +9,7 @@ export default class Logo extends Component {
                 <link rel="preconnect" href="https://fonts.gstatic.com"></link>
                 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap" rel="stylesheet"></link>
                 <div style={{
-                    fontSize: '5rem',
+                    fontSize: '2rem',
                     fontFamily:'Nunito',
                 }}
                 >Dublu</div>

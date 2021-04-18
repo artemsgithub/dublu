@@ -25,9 +25,7 @@ type RegisterState = {
   password: string
 };
 
- class Register extends React.Component<
-  RegisterProps,
-  RegisterState
+ class Register extends React.Component<RegisterProps,RegisterState
 > {
   constructor(props: RegisterProps) {
     super(props);
@@ -47,7 +45,6 @@ type RegisterState = {
 
   handleSubmit = (e: any) => {
     e.preventDefault();
-    // const url = `http://localhost:3000/user/register`;
     const body = { user: {
       email: this.state.email,
       password: this.state.password,

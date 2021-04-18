@@ -14,6 +14,10 @@ import Register from '../Components/Register'
 import Dashboard from '../Components/Dashboard'
 import Protector from '../Components/Protector'
 
+
+
+
+
 type setState ={
   sessionToken: string
 }
@@ -40,7 +44,7 @@ class App extends Component<{}, setState> {
     updateToken = (
       newToken: string,
     ) => {
-      localStorage.setItem("token", newToken);
+      localStorage.setItem('token', newToken);
       this.setState({ sessionToken: newToken }); //set the state w/new token
       console.log(newToken)
     };
@@ -50,11 +54,17 @@ class App extends Component<{}, setState> {
     
   return (
     <div className="App">
-     <h1>Welcome to <Logo /></h1>
+   
 
      <Router>
-      <div>
-        <nav>
+     
+        
+
+   
+        <Switch>
+          <Route exact path ="/">
+          <nav>
+          <h1>Welcome to <Logo /></h1>
           <ul>
             <li>
               <Link to="/register">Register</Link>
@@ -63,11 +73,8 @@ class App extends Component<{}, setState> {
               <Link to="/login">Login</Link>
             </li>
           </ul>
-        </nav>
-
-   
-        <Switch>
-          <Route exact path ="/"></Route>
+        </nav>  
+          </Route>
           <Route exact path="/register">
             <Register 
             updateToken={this.updateToken}
@@ -84,12 +91,11 @@ class App extends Component<{}, setState> {
           </Protector>
  
         </Switch>
-      </div>
+    
     </Router>
 
-
-
     </div>
+
   )
   }
 }

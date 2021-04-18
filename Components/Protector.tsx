@@ -18,7 +18,7 @@ export default class Protector extends Component<ProtectorProps>{
         console.log(sessionToken)
         return (
             <Route {...rest} render={(props) => (
-                sessionToken === token // if token matches session token, they shall pass. otherwise you shall.not.fkn pass.
+                !!token
                   ? children
                   : <Redirect to='/' />
               )} />
