@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import CenteredGrid from '../Components/Input'
+
 
 interface GetDataState {
     listingID: string
@@ -30,8 +30,7 @@ export default class GetData extends Component <{},GetDataState>{
     render() {
         return (
             <div>
-            
-        <CenteredGrid />
+                Just a functional API call component for now
             </div>
         )
     }
