@@ -6,16 +6,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
-import TextField from "@material-ui/core/TextField";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
+
 
 import { AiFillFileAdd } from "react-icons/ai";
 import { AiFillSetting } from "react-icons/ai";
@@ -23,8 +14,11 @@ import { AiFillSetting } from "react-icons/ai";
 import IconButton from "@material-ui/core/IconButton";
 import Logo from "../Assets/Logo";
 
-const drawerWidth = 0;
+import { Config } from './Config'
+import { AddListing } from './AddListing'
 
+
+const drawerWidth = 0;
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -70,23 +64,23 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function PermanentDrawerLeft() {
   const classes = useStyles();
 
-  const [open, setOpen] = React.useState(false);
-  const [configOpen, setconfigOpen] = React.useState(false);
+  const [isAddListingOpen, setIsAddListingOpen] = React.useState(false);
+  const [isConfigOpen, setIsConfigOpen] = React.useState(false);
 
   //   Open and close add listings
   const handleClickOpen = () => {
-    setOpen(true);
+    setIsAddListingOpen(true);
   };
   const handleClose = () => {
-    setOpen(false);
+    setIsAddListingOpen(false);
   };
 
   //   Open and close configs
   const handleConfigOpen = () => {
-    setconfigOpen(true);
+    setIsConfigOpen(true);
   };
   const handleConfigClose = () => {
-    setconfigOpen(false);
+    setIsConfigOpen(false);
   };
 
   return (
@@ -97,7 +91,7 @@ export default function PermanentDrawerLeft() {
           <Typography noWrap>
             <Logo />
           </Typography>
-          {/* ADD LISTING */}
+          {/* ICON ADD LISTING */}
           <IconButton
             color="inherit"
             className={classes.iconStyle}
@@ -106,167 +100,16 @@ export default function PermanentDrawerLeft() {
             <AiFillFileAdd />
           </IconButton>
 
-          {/* START DIALOG */}
-          <Dialog
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="form-dialog-title"
-          >
-            <DialogTitle
-              className={classes.dialogueStyles}
-              id="form-dialog-title"
-            >
-              Add Listing
-            </DialogTitle>
-            <DialogContent className={classes.dialogueStyles}>
-              <DialogContentText>
-                Please enter listing information
-              </DialogContentText>
-              {/* START USERS INPUT */}
+          {/* ADD LISTING*/}
+         <AddListing classes={classes} open={isAddListingOpen} handleClose={handleClose} /> 
 
-              <div className={classes.userRoot}>
-                <Container>
-                  <Grid container spacing={3}>
-                    <Grid item xs={12}>
-                      <Paper className={classes.paper}>
-                        <TextField
-                          id="standard-full-width"
-                          label="Address"
-                          style={{ margin: 8 }}
-                          helperText="Property Address"
-                          fullWidth
-                          margin="normal"
-                        />
-                      </Paper>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <Paper className={classes.paper}>
-                        <TextField
-                          id="standard-full-width"
-                          label="Comments"
-                          style={{ margin: 12 }}
-                          fullWidth
-                          margin="normal"
-                        />
-                      </Paper>
-                    </Grid>
-                    <Grid item xs={6}>
-                      <Paper className={classes.paper}>
-                        <TextField
-                          id="standard-full-width"
-                          label="Asking Price"
-                          style={{ paddingLeft: 8 }}
-                          fullWidth
-                          margin="normal"
-                        />
-                      </Paper>
-                    </Grid>
-                    <Grid item xs={6}>
-                      <Paper className={classes.paper}>
-                        <TextField
-                          id="standard-full-width"
-                          label="Semi Tax"
-                          style={{ margin: 8 }}
-                          fullWidth
-                          margin="normal"
-                        />
-                      </Paper>
-                    </Grid>
-                    <Grid item xs={6}>
-                      <Paper className={classes.paper}>
-                        <TextField
-                          id="standard-full-width"
-                          label="Estimated Monthly Income"
-                          style={{ margin: 8 }}
-                          fullWidth
-                          margin="normal"
-                        />
-                      </Paper>
-                    </Grid>
-                  </Grid>
-                </Container>
-              </div>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleClose} color="primary">
-                Cancel
-              </Button>
-              <Button onClick={handleClose} color="primary">
-                Add Listing
-              </Button>
-            </DialogActions>
-          </Dialog>
-
-          {/* SETTINGS ie. CONFIG */}
+          {/* ICON BUTTON CONFIG */}
           <IconButton color="inherit" onClick={handleConfigOpen}>
             <AiFillSetting />
           </IconButton>
 
-          {/* START CONFIG DIALOG */}
-          <Dialog open={configOpen} onClose={handleConfigClose}>
-            <DialogTitle
-              className={classes.dialogueStyles}
-              id="form-dialog-title"
-            >
-              Set Parameters
-            </DialogTitle>
-            <DialogContent className={classes.dialogueStyles}>
-              <DialogContentText>
-                Please enter universal parameters
-              </DialogContentText>
-              {/* START USERS INPUT */}
-
-              <div className={classes.userRoot}>
-                <Container>
-                  <Grid container spacing={3}>
-                    <Grid item xs={6}>
-                      <Paper className={classes.paper}>
-                        <TextField
-                          id="standard-full-width"
-                          label="Interest Rate"
-                          style={{ paddingLeft: 8 }}
-                          fullWidth
-                          margin="normal"
-                        />
-                      </Paper>
-                    </Grid>
-                    <Grid item xs={6}>
-                      <Paper className={classes.paper}>
-                        <TextField
-                          id="standard-full-width"
-                          label="Down Payment"
-                          helperText="As percentage, for no down, use 1"
-                          style={{ margin: 8 }}
-                          fullWidth
-                          margin="normal"
-                        />
-                      </Paper>
-                    </Grid>
-                    <Grid item xs={6}>
-                      <Paper className={classes.paper}>
-                        <TextField
-                          id="standard-full-width"
-                          label="Insurance Rate"
-                          helperText="Percentage"
-                          style={{ margin: 8 }}
-                          fullWidth
-                          margin="normal"
-                        />
-                      </Paper>
-                    </Grid>
-                  </Grid>
-                </Container>
-              </div>
-            </DialogContent>
-            <DialogActions>
-              <Button onClick={handleConfigClose} color="primary">
-                Cancel
-              </Button>
-              <Button onClick={handleConfigClose} color="primary">
-                Save Configs
-              </Button>
-            </DialogActions>
-          </Dialog>
+          {/* CONFIG UNIVERSAL PARAMS */}
+        <Config classes={classes} open={isConfigOpen} handleClose={handleConfigClose} />
         </Toolbar>
       </AppBar>
 

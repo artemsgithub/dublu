@@ -37,6 +37,7 @@ class App extends Component<{}, setState> {
   };
 
   render() {
+    const tokenPasser = this.state.sessionToken
     return (
       <div className="App">
         <Router>
