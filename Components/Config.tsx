@@ -34,21 +34,24 @@ export class Config extends Component <AddConfigProps, ConfigState> {
 
   setInterestRate = (event: any) => {
     this.setState({ interestRate: event.target.value });
+    console.log(this.state.interestRate)
   };
 
   setDownPmt = (event: any) => {
     this.setState({ downPmt: event.target.value });
+    console.log(this.state.downPmt)
   };
 
   setInsuranceRate = (event: any) => {
     this.setState({ insuranceRate: event.target.value });
+    console.log(this.state.insuranceRate)
   };
 
   handleSubmit = (event: any) => {
     event.preventDefault();
     const configsBody = { config: {
       interestRate: this.state.interestRate,
-      dwnPmt: this.state.downPmt,
+      downPmt: this.state.downPmt,
       insuranceRate: this.state.insuranceRate,
 
     }};
