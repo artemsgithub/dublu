@@ -1,11 +1,18 @@
 import React, { Component } from "react";
 
+interface ViewLisitngsProps {
+  listing: string;
+}
+
 type ViewListingState = {
-  listing: any;
+  listing: string;
 };
 
-export default class ViewListings extends Component<ViewListingState> {
-  constructor(props: any) {
+export class ViewListings extends Component<
+  ViewLisitngsProps,
+  ViewListingState
+> {
+  constructor(props: ViewLisitngsProps) {
     super(props);
     this.state = {
       listing: "",
@@ -13,7 +20,7 @@ export default class ViewListings extends Component<ViewListingState> {
   }
 
   componentDidMount() {
-    this.displayMine();
+      this.displayMine()
   }
 
   displayMine = () => {
@@ -27,7 +34,7 @@ export default class ViewListings extends Component<ViewListingState> {
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
-        this.setState({ listing: json})
+        this.setState(json);
       })
       .catch((error) => console.error("Error:", error));
   };
@@ -36,7 +43,6 @@ export default class ViewListings extends Component<ViewListingState> {
     return (
       <div>
         <h1>View Listings</h1>
-        <div>{this.state.listing.propertyAddress}</div>
       </div>
     );
   }
