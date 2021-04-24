@@ -16,11 +16,59 @@ interface AddConfigProps {
     classes: any 
 }
 
+type ConfigState = {
+  interestRate: number
+  downPmt: number
+  insuranceRate: number
+}
 
-export class Config extends Component <AddConfigProps> {
+export class Config extends Component <AddConfigProps, ConfigState> {
+  constructor(props: AddConfigProps) {
+    super(props) 
+    this.state = {
+      interestRate: 0,
+      downPmt: 0,
+      insuranceRate: 0,
+    }
+  }
+
+  setInterestRate = (event: any) => {
+    this.setState({ interestRate: event.target.value });
+  };
+
+  setDownPmt = (event: any) => {
+    this.setState({ downPmt: event.target.value });
+  };
+
+  setInsuranceRate = (event: any) => {
+    this.setState({ insuranceRate: event.target.value });
+  };
+
+  handleSubmit = (event: any) => {
+    event.preventDefault();
+    const configsBody = { config: {
+      interestRate: this.state.interestRate,
+      dwnPmt: this.state.downPmt,
+      insuranceRate: this.state.insuranceRate,
+
+    }};
+  
+    fetch(`http://localhost:3000/configs/createconfig`, {
+      method: "POST",
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem('token') ?? '',
+      }),
+      body: JSON.stringify(configsBody),
+    })
+      .then((response ) => response.json())
+  
+  }
+
     render() {
         return (
             <Dialog open={this.props.open} onClose={this.props.handleClose}>
+            <form onSubmit={this.handleSubmit}> 
             <DialogTitle
               className={this.props.classes.dialogueStyles}
               id="form-dialog-title"
@@ -44,6 +92,7 @@ export class Config extends Component <AddConfigProps> {
                           style={{ paddingLeft: 8 }}
                           fullWidth
                           margin="normal"
+                          onChange={this.setInterestRate.bind(this)}
                         />
                       </Paper>
                     </Grid>
@@ -56,6 +105,7 @@ export class Config extends Component <AddConfigProps> {
                           style={{ margin: 8 }}
                           fullWidth
                           margin="normal"
+                          onChange={this.setDownPmt.bind(this)}
                         />
                       </Paper>
                     </Grid>
@@ -68,6 +118,7 @@ export class Config extends Component <AddConfigProps> {
                           style={{ margin: 8 }}
                           fullWidth
                           margin="normal"
+                          onChange={this.setInsuranceRate.bind(this)}
                         />
                       </Paper>
                     </Grid>
@@ -79,10 +130,11 @@ export class Config extends Component <AddConfigProps> {
               <Button onClick={this.props.handleClose} color="primary">
                 Cancel
               </Button>
-              <Button onClick={this.props.handleClose} color="primary">
+              <Button onClick={this.props.handleClose} color="primary" type="submit">
                 Save Configs
               </Button>
             </DialogActions>
+            </form>
           </Dialog>
         )
     }

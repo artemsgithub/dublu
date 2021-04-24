@@ -76,7 +76,8 @@ handleSubmit = (event: any) => {
     method: "POST",
     headers: new Headers({
       "Content-Type": "application/json",
-      'Authorization': "localStorage.getItem('token')" // need token to get passed here as prop
+      Authorization: localStorage.getItem('token') ?? '',
+      // ?? => if the value before the ?? is undefine or null, then return the value after the double question marks | checks for flasey or truthy 
     }),
     body: JSON.stringify(listingsBody),
   })
