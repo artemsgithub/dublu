@@ -88,9 +88,9 @@ export default function PermanentDrawerLeft() {
       <CssBaseline />
       <AppBar position="absolute" className={classes.appBar}>
         <Toolbar>
-          <Typography noWrap>
+          <div >
             <Logo />
-          </Typography>
+          </div>
           {/* ICON ADD LISTING */}
           <IconButton
             color="inherit"

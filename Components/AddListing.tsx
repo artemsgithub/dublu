@@ -63,7 +63,7 @@ setEstimatedIncome = (event: any) => {
 }
 
 handleSubmit = (event: any) => {
-  event.preventDefault();
+
   const listingsBody = { listing: {
     propertyAddress: this.state.propertyAddress,
     comments: this.state.comments,

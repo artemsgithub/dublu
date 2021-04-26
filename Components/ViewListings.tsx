@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 
+import { Listing } from './Listing'
+
 interface ViewLisitngsProps {
-  listing: string;
+
 }
 
 type ViewListingState = {
-  listing: string;
+  listings: any[] | null
 };
 
 export class ViewListings extends Component<
@@ -15,13 +17,15 @@ export class ViewListings extends Component<
   constructor(props: ViewLisitngsProps) {
     super(props);
     this.state = {
-      listing: "",
+      listings: null,
     };
   }
 
   componentDidMount() {
       this.displayMine()
   }
+
+
 
   displayMine = () => {
     fetch("http://localhost:3000/listings/mine/", {
@@ -34,15 +38,23 @@ export class ViewListings extends Component<
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
-        this.setState(json);
+        this.setState({listings : json});
       })
       .catch((error) => console.error("Error:", error));
   };
 
   render() {
+    
+    if (this.state.listings === null) {
+      return <div style={{marginTop: '25px'}}>Loading</div>
+    }
+
     return (
       <div>
         <h1>View Listings</h1>
+        {this.state.listings.map((listing, index) => {
+          return <div key={index}><Listing config={'fakeconfig'} listing={listing} /></div>
+        })}
       </div>
     );
   }

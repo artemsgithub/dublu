@@ -8,6 +8,7 @@ import Register from "../Components/Register";
 import Dashboard from "../Components/Dashboard";
 import Protector from "../Components/Protector";
 
+
 type setState = {
   sessionToken: string;
 };
@@ -39,21 +40,16 @@ class App extends Component<{}, setState> {
   render() {
     return (
       <div className="App">
+    
         <Router>
           <Switch>
             <Route exact path="/">
               <nav>
-                <h1>
-                  Welcome to <Logo />
-                </h1>
-                <ul>
-                  <li>
-                    <Link to="/register">Register</Link>
-                  </li>
-                  <li>
-                    <Link to="/login">Login</Link>
-                  </li>
-                </ul>
+              <Login
+                updateToken={this.updateToken}
+                token={this.state.sessionToken}
+              />
+
               </nav>
             </Route>
             <Route exact path="/register">
@@ -63,10 +59,7 @@ class App extends Component<{}, setState> {
               />
             </Route>
             <Route exact path="/login">
-              <Login
-                updateToken={this.updateToken}
-                token={this.state.sessionToken}
-              />
+             
             </Route>
             <Protector
               sessionToken={this.state.sessionToken}
