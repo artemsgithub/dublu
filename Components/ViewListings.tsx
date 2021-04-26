@@ -8,6 +8,7 @@ interface ViewLisitngsProps {
 
 type ViewListingState = {
   listings: any[] | null
+  configs: any[] | null
 };
 
 export class ViewListings extends Component<
@@ -18,11 +19,13 @@ export class ViewListings extends Component<
     super(props);
     this.state = {
       listings: null,
+      configs: null,
     };
   }
 
   componentDidMount() {
       this.displayMine()
+      this.fetchConfigs()
   }
 
 
@@ -43,6 +46,23 @@ export class ViewListings extends Component<
       .catch((error) => console.error("Error:", error));
   };
 
+  fetchConfigs = () => {
+    fetch("http://localhost:3000/configs/myConfigs/", {
+      method: "GET",
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token") ?? "",
+      }),
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        console.log(json);
+        this.setState({configs : json});
+      })
+      .catch((error) => console.error("Error:", error));
+  };
+
+
   render() {
     
     if (this.state.listings === null) {
@@ -51,10 +71,7 @@ export class ViewListings extends Component<
 
     return (
       <div>
-        <h1>View Listings</h1>
-        {this.state.listings.map((listing, index) => {
-          return <div key={index}><Listing config={'fakeconfig'} listing={listing} /></div>
-        })}
+           <div><Listing configs={this.state.configs} listings={this.state.listings} /></div>
       </div>
     );
   }

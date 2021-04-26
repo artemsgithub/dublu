@@ -1,15 +1,21 @@
 import React, { Component } from 'react'
 
+import { FiEdit, FiMapPin } from "react-icons/fi";
+import { RiDeleteBin6Line } from "react-icons/ri"
+import Paper from '@material-ui/core/Paper'
+import Card from '@material-ui/core/Card'
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import IconButton from "@material-ui/core/IconButton";
+import TableContainer from '@material-ui/core/TableContainer';
 import Link from '@material-ui/core/Link';
 
 interface ListingProps { 
-    listing: any
-    config: any
+    listings: any[] | null
+    configs: any
 }
 
 
@@ -18,46 +24,57 @@ export class Listing extends Component <ListingProps> {
 
     render() {
 
-        // function createData(id: number, date: string, name: string, shipTo: string, paymentMethod: string, amount: number) {
-        //     return { id, date, name, shipTo, paymentMethod, amount };
-        //   }
-
-        // const rows = [
-        //     createData(0, '16 Mar, 2019', 'Elvis Presley', 'Tupelo, MS', 'VISA ⠀•••• 3719', 312.44),
-        //     createData(1, '16 Mar, 2019', 'Paul McCartney', 'London, UK', 'VISA ⠀•••• 2574', 866.99),
-        //     createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'MC ⠀•••• 1253', 100.81),
-        //     createData(3, '16 Mar, 2019', 'Michael Jackson', 'Gary, IN', 'AMEX ⠀•••• 2000', 654.39),
-        //     createData(4, '15 Mar, 2019', 'Bruce Springsteen', 'Long Branch, NJ', 'VISA ⠀•••• 5919', 212.79),
-        //   ];
+        const styles = {
+            table: {
+                minWidth: '650'
+            }
+        }
         
-        // calculations here, because listing and config is here 
+        // calculations here
 
+        
+        
         return (
+           
+            <React.Fragment>
+
             <div>
-                {this.props.listing.propertyAddress}
-                <Table size="small">
-        <TableHead>
+                <h1>View Listings</h1>
+                <TableContainer component={Paper}>
+                <Table style={styles.table} size="small">
+       <TableHead>
           <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Ship To</TableCell>
-            <TableCell>Payment Method</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
+            <TableCell><strong>Property Address</strong></TableCell>
+            <TableCell><strong>Comments</strong></TableCell>
+            <TableCell><strong>Asking Price</strong></TableCell>
+            <TableCell><strong>SemiTax</strong></TableCell>
+            <TableCell><strong>Estimated Income (Monthly)</strong></TableCell>
+            <TableCell align="right"><strong>Edit</strong></TableCell>
+            <TableCell align="right"><strong>Map</strong></TableCell>
+            <TableCell align="right"><strong>Delete</strong></TableCell>
+            
+
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.shipTo}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{row.amount}</TableCell>
+          {this.props.listings != null ? this.props.listings.map((listing, index)  => (
+            <TableRow key={index}>
+              <TableCell>{listing.propertyAddress}</TableCell>
+              <TableCell>{listing.comments}</TableCell>
+              <TableCell>{listing.askingPrice}</TableCell>
+              <TableCell>{listing.semiTax}</TableCell>
+              <TableCell>{listing.estIncome}</TableCell>
+              <TableCell align="right"><IconButton size="small"><FiEdit/></IconButton></TableCell>
+              <TableCell align="right"><IconButton size="small"><FiMapPin/></IconButton></TableCell>
+              <TableCell align="right"><IconButton size="small"><RiDeleteBin6Line/></IconButton></TableCell>
             </TableRow>
-          ))}
+          )):''}
         </TableBody>
       </Table>
+      </TableContainer>
             </div>
+            </React.Fragment>
+          
         )
     }
 }
