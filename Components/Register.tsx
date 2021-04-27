@@ -36,16 +36,17 @@ type RegisterState = {
     };
   }
 
-  setEmail = (e: any) => {
-    this.setState({ email: e.target.value });
+  setEmail = (event: any) => {
+    this.setState({ email: event.target.value });
   };
 
-  setPassword = (e: any) => {
-    this.setState({ password: e.target.value });
+  setPassword = (event: any) => {
+    this.setState({ password: event.target.value });
   };
 
-  handleSubmit = (e: any) => {
-    e.preventDefault();
+  handleSubmit = (event: any) => {
+    event.preventDefault();
+    
     const body = { user: {
       email: this.state.email,
       password: this.state.password,
@@ -66,12 +67,12 @@ type RegisterState = {
   // This fires once, allowing each user one table to make edits
   // to configs which are values that are used universally and should not
 
-  sendDefaultConfigValues = (event: any) => {
-    event.preventDefault();
+  sendDefaultConfigValues = () => {
+    
     const configsBody = { config: {
-      interestRate: 1,
-      downPmt: 2,
-      insuranceRate: 3,
+      interestRate: 4,
+      downPmt: 5,
+      insuranceRate: 6,
       
     }};
     fetch(`http://localhost:3000/configs/createconfig`, {
@@ -85,7 +86,9 @@ type RegisterState = {
     .then((response ) => response.json())
     
   }
-
+  componentWillUnmount() {
+    this.sendDefaultConfigValues()
+  }
 
 
   render() {
