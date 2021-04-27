@@ -47,15 +47,15 @@ export class Config extends Component <AddConfigProps, ConfigState> {
     console.log(this.state.insuranceRate)
   };
 
+  
   handleSubmit = (event: any) => {
     event.preventDefault();
     const configsBody = { config: {
       interestRate: this.state.interestRate,
       downPmt: this.state.downPmt,
       insuranceRate: this.state.insuranceRate,
-
+      
     }};
-  
     fetch(`http://localhost:3000/configs/createconfig`, {
       method: "POST",
       headers: new Headers({
@@ -64,12 +64,13 @@ export class Config extends Component <AddConfigProps, ConfigState> {
       }),
       body: JSON.stringify(configsBody),
     })
-      .then((response ) => response.json())
-  
+    .then((response ) => response.json())
+    
   }
-
-    render() {
-        return (
+  
+  render() {
+    
+    return (
             <Dialog open={this.props.open} onClose={this.props.handleClose}>
             <form onSubmit={this.handleSubmit}> 
             <DialogTitle

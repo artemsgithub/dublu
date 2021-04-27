@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Link from "@material-ui/core/Link";
+import Paper from "@material-ui/core/Paper"
 
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -62,20 +63,71 @@ type RegisterState = {
       .then(() => this.props.history.push('/dashboard'))
   };
 
+  // This fires once, allowing each user one table to make edits
+  // to configs which are values that are used universally and should not
+
+  sendDefaultConfigValues = (event: any) => {
+    event.preventDefault();
+    const configsBody = { config: {
+      interestRate: 1,
+      downPmt: 2,
+      insuranceRate: 3,
+      
+    }};
+    fetch(`http://localhost:3000/configs/createconfig`, {
+      method: "POST",
+      headers: new Headers({
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem('token') ?? '',
+      }),
+      body: JSON.stringify(configsBody),
+    })
+    .then((response ) => response.json())
+    
+  }
+
+
+
   render() {
+
+    const styles = {
+      paper: {
+        marginTop: "20vh",
+        display: "flex",
+        flexDirection: "column" as "column",
+        alignItems: "center",
+      },
+      form: {
+        width: '100%',
+        marginTop: "2vh"
+      },
+      button: {
+        marginTop: "4vh"
+      },
+      txtField: {
+        marginBottom: "2vh"
+      },
+      container: {
+        paddingLeft: "25px",
+        paddingRight: "25px",
+        paddingBottom: '25px'
+      },
+    };
+
     return (
+      
       <div>
-        <Container maxWidth="xs">
+        <Container component={Paper} maxWidth="xs" style={styles.container} >
           <CssBaseline />
-          <div className="paper" style={{ marginTop: "30px" }}>
-            <h1>Register</h1>
+          <div style={styles.paper} className="paper">
+            <Typography style={{marginTop: '25px', marginBottom: '15px'}} component="main" variant="h5">Sign up</Typography>
             <form
               onSubmit={this.handleSubmit}
-              className="formRegister"
+              style={styles.form}
             >
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
+            
                   <TextField
+                    style={styles.txtField}
                     variant="outlined"
                     required
                     fullWidth
@@ -85,8 +137,8 @@ type RegisterState = {
                     autoComplete="email"
                     onChange={this.setEmail.bind(this)}
                   />
-                </Grid>
-                <Grid item xs={12}>
+            
+          
                   <TextField
                     variant="outlined"
                     required
@@ -98,9 +150,9 @@ type RegisterState = {
                     autoComplete="current-password"
                     onChange={this.setPassword.bind(this)}
                   />
-                </Grid>
-              </Grid>
+
               <Button
+                style={styles.button}
                 type="submit"
                 fullWidth
                 variant="contained"
@@ -118,6 +170,7 @@ type RegisterState = {
             </form>
           </div>
         </Container>
+    
       </div>
     );
   }

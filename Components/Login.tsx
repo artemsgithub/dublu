@@ -3,7 +3,7 @@ import React from "react";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-
+import Box from "@material-ui/core/Box"
 
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -15,6 +15,7 @@ import Paper from "@material-ui/core/Paper";
 import Avatar from "@material-ui/core/Avatar";
 
 import LogoLarge from '../Assets/LogoLarge'
+import {Description} from '../Components/Description'
 
 type LoginProps = {
   updateToken: any;
@@ -85,7 +86,7 @@ class Login extends React.Component<LoginProps, LoginState> {
         height: "100vh",
       },
       image: {
-        backgroundImage: "url(https://tinyurl.com/dublubackground)",
+        backgroundImage: "url(https://images.unsplash.com/photo-1619491202102-088c4afb271c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2100&q=80)",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -97,11 +98,26 @@ class Login extends React.Component<LoginProps, LoginState> {
         flexDirection: "column" as "column",
         // above is a jank workaround for a css in js issue: https://github.com/cssinjs/jss/issues/1344
         alignItems: "center",
+        paddingRight: "40px",
+        paddingLeft: "40px",
       },
       form: {
-        width: "100%",
+        width: "75%",
         marginTop: '8px',
       },
+      txtField: {
+        marginBottom: "2vh",
+      },
+
+      button: {
+        marginBottom: "2vh",
+        width: "125%",
+        justifyContent: "center",
+        height: "40px"
+      },
+      link: {
+        textDecoration: "none"
+      }
 
     };
     return (
@@ -120,6 +136,7 @@ class Login extends React.Component<LoginProps, LoginState> {
               className="formLogin"
             >
               <TextField
+                style={styles.txtField}
                 variant="outlined"
                 margin="normal"
                 required
@@ -132,6 +149,7 @@ class Login extends React.Component<LoginProps, LoginState> {
               />
 
               <TextField
+                style={styles.txtField}
                 variant="outlined"
                 required
                 fullWidth
@@ -142,8 +160,9 @@ class Login extends React.Component<LoginProps, LoginState> {
                 autoComplete="current-password"
                 onChange={this.setPassword.bind(this)}
               />
-
+              <Box style={{display: 'flex', padding: 8, justifyContent: "center", alignItems: "center"}}>
               <Button
+                style={styles.button}
                 type="submit"
                 fullWidth
                 variant="contained"
@@ -152,20 +171,28 @@ class Login extends React.Component<LoginProps, LoginState> {
               >
                 Log Me in
               </Button>
-              <Grid container justify="flex-end">
-                <Grid item></Grid>
-              </Grid>
-              <Grid container>
-                <Grid item>
-                  <Link to="/register">
+              </Box>
+         
+              <Grid>
+                <Grid item> 
+                <Box style={{display: 'flex', padding: 8, justifyContent: "center", alignItems: "center"}}>
+                <Button 
+                  
+                  style={styles.button}
+                  color="secondary">
+                  <Link style={styles.link} to="/register">
                     {"Don't have an account? Sign Up"}
                   </Link>
+                 </Button>
+                 </Box>
                 </Grid>
               </Grid>
+        <Description/>
             </form>
           </div>
         </Grid>
       </Grid>
+
     );
   }
 }

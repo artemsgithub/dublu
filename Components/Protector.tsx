@@ -16,12 +16,17 @@ export default class Protector extends Component<ProtectorProps>{
         const token = localStorage.getItem("token")
         console.log(token)
         console.log(sessionToken)
+        if (token === undefined) {
+            <Redirect to="/" />
+        }
         return (
+            <>
             <Route {...rest} render={(props) => (
-                !!token
+                !!token 
                   ? children
                   : <Redirect to='/' />
               )} />
+            </>
         )
     }
 }

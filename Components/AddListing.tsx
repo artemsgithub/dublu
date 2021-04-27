@@ -92,11 +92,13 @@ handleSubmit = (event: any) => {
         open={this.props.open}
         onClose={this.props.handleClose}
         aria-labelledby="form-dialog-title"
+        
       >
         <form onSubmit={this.handleSubmit}>
         <DialogTitle
           className={this.props.classes.dialogueStyles}
           id="form-dialog-title"
+         
         >
           Add Listing
         </DialogTitle>

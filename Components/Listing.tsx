@@ -39,7 +39,7 @@ export class Listing extends Component <ListingProps> {
             <React.Fragment>
 
             <div>
-                <h1>View Listings</h1>
+                <h2 style={{marginLeft: '2vh', marginTop: '4vh'}}>View Listings</h2>
                 <TableContainer component={Paper}>
                 <Table style={styles.table} size="small">
        <TableHead>

@@ -10,7 +10,7 @@ import Divider from "@material-ui/core/Divider";
 
 import { AiFillFileAdd } from "react-icons/ai";
 import { AiFillSetting } from "react-icons/ai";
-
+import { BiLogOut } from "react-icons/bi"
 import IconButton from "@material-ui/core/IconButton";
 import Logo from "../Assets/Logo";
 
@@ -83,10 +83,22 @@ export default function PermanentDrawerLeft() {
     setIsConfigOpen(false);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    location.reload();
+  }
+
+  
+// linear-gradient(to top, #0ba360 0%, #3cba92 100%)" green
+// linear-gradient(to bottom, #434343 0%, black 100% black 
+// "linear-gradient(to bottom, #323232 0%, #3F3F3F 40%, #1C1C1C 150%), linear-gradient(to top, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.25) 200%)", carbon
+  backgroundBlendMode: "multiply"
   return (
+
+    
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="absolute" className={classes.appBar}>
+      <AppBar position="absolute" className={classes.appBar} style={{background: "" }}>
         <Toolbar>
           <div >
             <Logo />
@@ -110,6 +122,9 @@ export default function PermanentDrawerLeft() {
 
           {/* CONFIG UNIVERSAL PARAMS */}
         <Config classes={classes} open={isConfigOpen} handleClose={handleConfigClose} />
+        <IconButton color="inherit" onClick={handleLogout}>
+          <BiLogOut/>
+        </IconButton>
         </Toolbar>
       </AppBar>
 
