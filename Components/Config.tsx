@@ -47,7 +47,7 @@ export class Config extends Component <AddConfigProps, ConfigState> {
     console.log(this.state.insuranceRate)
   };
 
-  
+  //  update config values to personal prefrence 
   handleSubmit = (event: any) => {
     event.preventDefault();
     const configsBody = { config: {
@@ -56,8 +56,10 @@ export class Config extends Component <AddConfigProps, ConfigState> {
       insuranceRate: this.state.insuranceRate,
       
     }};
-    fetch(`http://localhost:3000/configs/createconfig`, {
-      method: "POST",
+
+
+    fetch(`http://localhost:3000/configs/edit/`, {
+      method: "PUT",
       headers: new Headers({
         "Content-Type": "application/json",
         Authorization: localStorage.getItem('token') ?? '',

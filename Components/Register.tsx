@@ -86,6 +86,8 @@ type RegisterState = {
     .then((response ) => response.json())
     
   }
+
+  
   componentWillUnmount() {
     this.sendDefaultConfigValues()
   }
