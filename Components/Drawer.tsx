@@ -138,8 +138,10 @@ export default function PermanentDrawerLeft() {
       >
         <div className={classes.toolbar} />
         <Divider />
+        
       </Drawer>
       <main className={classes.content}></main>
+     
     </div>
   );
 }

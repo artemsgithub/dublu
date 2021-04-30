@@ -9,7 +9,7 @@ import Paper from "@material-ui/core/Paper"
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-
+import LogoLarge from '../Assets/LogoLarge'
 import { withRouter } from 'react-router-dom'
 
 
@@ -87,7 +87,8 @@ type RegisterState = {
     
   }
 
-  
+  // need to implement a way to
+
   componentWillUnmount() {
     this.sendDefaultConfigValues()
   }
@@ -125,6 +126,10 @@ type RegisterState = {
         <Container component={Paper} maxWidth="xs" style={styles.container} >
           <CssBaseline />
           <div style={styles.paper} className="paper">
+            <br/>
+            <br/>
+
+            <LogoLarge/>
             <Typography style={{marginTop: '25px', marginBottom: '15px'}} component="main" variant="h5">Sign up</Typography>
             <form
               onSubmit={this.handleSubmit}
@@ -169,7 +174,7 @@ type RegisterState = {
               </Button>
               <Grid container justify="flex-end">
                 <Grid item>
-
+      
                 </Grid>
               </Grid>
             </form>

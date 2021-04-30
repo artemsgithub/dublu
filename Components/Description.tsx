@@ -9,7 +9,7 @@ export class Description extends Component {
                 <div>Dublu is an app designed to organize the process of purchasing an investment property.</div>
                 <h2>Why is Dublu?</h2>
                 <div>Investing in real estate isn't just for rich people, average people can get started in small ways that make a big diffrence.</div>
-             
+                
                 <div></div>
             </Box>
         )
