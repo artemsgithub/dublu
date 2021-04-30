@@ -13,7 +13,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import Link from '@material-ui/core/Link';
 import Card from '@material-ui/core/Card'
 
-import * as formulajs from '@formulajs/formulajs'
+// @ts-ignore 
+import * as formulajs from '@formulajs/formulajs' 
 
 interface ListingProps { 
     listing: any

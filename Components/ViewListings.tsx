@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 
 
-import { FiEdit, FiMapPin } from "react-icons/fi";
-import { RiDeleteBin6Line } from "react-icons/ri"
 import Paper from '@material-ui/core/Paper'
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -14,7 +12,6 @@ import TableContainer from '@material-ui/core/TableContainer';
 import Link from '@material-ui/core/Link';
 import Card from '@material-ui/core/Card'
 
-import * as formulajs from '@formulajs/formulajs'
 
 import { Listing } from '../Components/Listing'
 
@@ -93,24 +90,6 @@ export class ViewListings extends Component<
               minWidth: '650'
           }
       }
-      
-      // calculations here
-console.log(
-      formulajs.SUM([1, 2 , 5])
-      )
-      const handleDelete = (id: number) => {
-
-        fetch(`http://localhost:3000/listings/delete/${id}`, {
-            method: 'DELETE',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-                Authorization: localStorage.getItem('token') ?? '',
-            })
-        })
-          .then((response) => response.json())//simple refresh would do, right don't really need to get listings again? 
-          .then(() => location.reload())
-    }
-    
       
       return (
          
