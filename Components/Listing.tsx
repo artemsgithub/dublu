@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 
 import { FiEdit, FiMapPin } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri"
+import { CgDetailsMore } from "react-icons/cg"
+import { BsHouse } from "react-icons/bs"
+
 import Paper from '@material-ui/core/Paper'
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -12,6 +15,11 @@ import IconButton from "@material-ui/core/IconButton";
 import TableContainer from '@material-ui/core/TableContainer';
 import Link from '@material-ui/core/Link';
 import Card from '@material-ui/core/Card'
+import Dialog from '@material-ui/core/Dialog'
+import { DialogTitle } from '@material-ui/core';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
 
 // @ts-ignore 
 import * as formulajs from '@formulajs/formulajs' 
@@ -21,16 +29,29 @@ interface ListingProps {
     configs: any
 }
 
+type ListingState={
+  open: any
+}
 
 
-export class Listing extends Component <ListingProps> {
-  
+export class Listing extends Component <ListingProps, ListingState> {
+
     
     constructor(props: any) {
       super(props) 
-
+      this.state = {
+        open: false,
+      }
     }
       
+    handleClickOpen = () => {
+      this.setState({ open: true });
+    };
+
+    handleClose = () => {
+      this.setState({ open: false });
+    };
+
       // const { listing , configs } = this.props
       // console.log(this.props.configs?.[0].interestRate)
       handlePmt = () => {
@@ -53,6 +74,9 @@ export class Listing extends Component <ListingProps> {
         }
       }
 
+      handleHomeOwnerIns = () => {
+        return Math.round(this.props.listing.askingPrice*this.props.configs?.[0].insuranceRate/12)
+      }
 
 
       handleDelete = (id: number) => {
@@ -74,22 +98,44 @@ export class Listing extends Component <ListingProps> {
       render() {  
   
         return (
-        
+      <>
           <TableRow>
           <TableCell>{this.props.listing.propertyAddress}</TableCell>
           <TableCell>{this.props.listing.comments}</TableCell>
           <TableCell>{this.props.listing.askingPrice}</TableCell>
           <TableCell>{this.props.listing.semiTax}</TableCell>
           <TableCell>{this.props.listing.estIncome}</TableCell>
-          <TableCell>{this.handlePmt()}</TableCell>
-          <TableCell>{this.handleEscrow()}</TableCell>
-          <TableCell>{this.handleMortgageIns()}</TableCell>
+  
+        
+          
 
-          <TableCell align="right"><IconButton size="small"><FiEdit/></IconButton></TableCell>
+          <TableCell align="right"><IconButton size="small" ><FiEdit/></IconButton></TableCell>
           <TableCell align="right"><IconButton size="small" ><FiMapPin/></IconButton></TableCell>
+          <TableCell align="right"><IconButton size="small" onClick={this.handleClickOpen}><CgDetailsMore/></IconButton></TableCell>
           <TableCell align="right"><IconButton size="small" onClick={() => this.handleDelete(this.props.listing.id)}><RiDeleteBin6Line/></IconButton></TableCell>
         </TableRow>
-          
+
+        <Dialog
+        open={this.state.open}
+        onClose={this.handleClose}
+        >
+        <DialogTitle><BsHouse/>{`  `}<strong>{this.props.listing.propertyAddress}</strong></DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+          <h3>Expenses</h3>
+          </DialogContentText>
+          <div><strong>Monthly Mortgage Payment: </strong>{this.handlePmt()}</div>
+          <div><strong>Mortgage Insurance: </strong>{this.handleMortgageIns()}</div>
+          <div><strong>Escrow: </strong>{this.handleEscrow()}</div>
+          <div><strong>Homeowners Insurance: </strong>{this.handleHomeOwnerIns()}</div>
+
+     
+        </DialogContent>
+
+        <div></div>
+        </Dialog>
+        </>
+ 
         )
     }
 }

@@ -101,31 +101,35 @@ export class ViewListings extends Component<
               <Table style={styles.table} size="small">
      <TableHead>
         <TableRow>
+
           <TableCell><strong>Property Address</strong></TableCell>
           <TableCell><strong>Comments</strong></TableCell>
           <TableCell><strong>Asking Price</strong></TableCell>
           <TableCell><strong>SemiTax</strong></TableCell>
           <TableCell><strong>Monthly Income</strong></TableCell>
-          <TableCell><strong>Mortgage Pmt</strong></TableCell>
-          <TableCell><strong>Escrow</strong></TableCell>
-          <TableCell><strong>Mortgage Insurance</strong></TableCell>
+       
+       
+          
 
 
           <TableCell align="right"><strong>Edit</strong></TableCell>
           <TableCell align="right"><strong>Map</strong></TableCell>
+          <TableCell align="right"><strong>More</strong></TableCell>
           <TableCell align="right"><strong>Delete</strong></TableCell>
+
           
 
         </TableRow>
       </TableHead>
       <TableBody>
         {this.state.listings.map((listing, index)  => (
-          <Listing  key={index } listing={listing} configs={this.state.configs} />
+          <Listing  key={index} listing={listing} configs={this.state.configs} />
         ))}
       </TableBody>
     </Table>
     </TableContainer>
           </div>
+          
           </React.Fragment>
         
       )

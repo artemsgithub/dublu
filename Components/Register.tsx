@@ -72,7 +72,7 @@ type RegisterState = {
     const configsBody = { config: {
       interestRate: .0425,
       downPmt: .20,
-      insuranceRate: 6,
+      insuranceRate: .0125,
       
     }};
     fetch(`http://localhost:3000/configs/createconfig`, {
