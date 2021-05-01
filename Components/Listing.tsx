@@ -24,40 +24,70 @@ interface ListingProps {
 
 
 export class Listing extends Component <ListingProps> {
+  
+    
+    constructor(props: any) {
+      super(props) 
 
-    render() {
+    }
       
-      const { listing } = this.props 
+      // const { listing , configs } = this.props
+      // console.log(this.props.configs?.[0].interestRate)
+      handlePmt = () => {
+        // PMT (interestRate/12, 360, AskingPrice-DownPMT, 0)*-1
+        let downPmtValue = (this.props.configs?.[0].downPmt)*this.props.listing.askingPrice
+        return `$${Math.round(formulajs.PMT(this.props.configs?.[0].interestRate/12, 360, this.props.listing.askingPrice-downPmtValue, 0)*-1)}`
+      }
 
-        // calculations here
-console.log(
-        formulajs.SUM([1, 2 , 5])
-        )
-        const handleDelete = (id: number) => {
-
-          fetch(`http://localhost:3000/listings/delete/${this.props.listing.id}`, {
-              method: 'DELETE',
-              headers: new Headers({
-                  'Content-Type': 'application/json',
-                  Authorization: localStorage.getItem('token') ?? '',
-              })
-          })
-            .then((response) => response.json())//simple refresh would do, right don't really need to get listings again? 
-            .then(() => location.reload())
+      handleEscrow = () => {
+        // SemiTax*12/2
+        return Math.round(this.props.listing.semiTax*2/12)
       }
       
+      handleMortgageIns = () => {
+        // 1% of asking price, <.20 (min) then 0 
+        if (this.props.configs?.[0].downPmt < .20) {
+          return Math.round((this.props.listing.askingPrice*.01)/12)
+        } else {
+          return 0 
+        }
+      }
+
+
+
+      handleDelete = (id: number) => {
         
+        fetch(`http://localhost:3000/listings/delete/${this.props.listing.id}`, {
+          method: 'DELETE',
+          headers: new Headers({
+            'Content-Type': 'application/json',
+            Authorization: localStorage.getItem('token') ?? '',
+          })
+        })
+        .then((response) => response.json())//simple refresh would do, right don't really need to get listings again? 
+        .then(() => location.reload())
+      }
+      
+
+   
+      
+      render() {  
+  
         return (
         
           <TableRow>
-          <TableCell>{listing.propertyAddress}</TableCell>
-          <TableCell>{listing.comments}</TableCell>
-          <TableCell>{listing.askingPrice}</TableCell>
-          <TableCell>{listing.semiTax}</TableCell>
-          <TableCell>{listing.estIncome}</TableCell>
+          <TableCell>{this.props.listing.propertyAddress}</TableCell>
+          <TableCell>{this.props.listing.comments}</TableCell>
+          <TableCell>{this.props.listing.askingPrice}</TableCell>
+          <TableCell>{this.props.listing.semiTax}</TableCell>
+          <TableCell>{this.props.listing.estIncome}</TableCell>
+          <TableCell>{this.handlePmt()}</TableCell>
+          <TableCell>{this.handleEscrow()}</TableCell>
+          <TableCell>{this.handleMortgageIns()}</TableCell>
+
           <TableCell align="right"><IconButton size="small"><FiEdit/></IconButton></TableCell>
-          <TableCell align="right"><IconButton size="small"><FiMapPin/></IconButton></TableCell>
-          <TableCell align="right"><IconButton size="small" onClick={() => handleDelete(listing.id)}><RiDeleteBin6Line/></IconButton></TableCell>
+          <TableCell align="right"><IconButton size="small" ><FiMapPin/></IconButton></TableCell>
+          <TableCell align="right"><IconButton size="small" onClick={() => this.handleDelete(this.props.listing.id)}><RiDeleteBin6Line/></IconButton></TableCell>
         </TableRow>
           
         )

@@ -105,7 +105,12 @@ export class ViewListings extends Component<
           <TableCell><strong>Comments</strong></TableCell>
           <TableCell><strong>Asking Price</strong></TableCell>
           <TableCell><strong>SemiTax</strong></TableCell>
-          <TableCell><strong>Estimated Income (Monthly)</strong></TableCell>
+          <TableCell><strong>Monthly Income</strong></TableCell>
+          <TableCell><strong>Mortgage Pmt</strong></TableCell>
+          <TableCell><strong>Escrow</strong></TableCell>
+          <TableCell><strong>Mortgage Insurance</strong></TableCell>
+
+
           <TableCell align="right"><strong>Edit</strong></TableCell>
           <TableCell align="right"><strong>Map</strong></TableCell>
           <TableCell align="right"><strong>Delete</strong></TableCell>
@@ -115,7 +120,7 @@ export class ViewListings extends Component<
       </TableHead>
       <TableBody>
         {this.state.listings.map((listing, index)  => (
-          <Listing  key={index } listing={listing} configs ={this.state.configs} />
+          <Listing  key={index } listing={listing} configs={this.state.configs} />
         ))}
       </TableBody>
     </Table>

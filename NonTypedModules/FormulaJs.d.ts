@@ -1,1 +1,1 @@
-declare module '@formulajs/formulajs'
+declare module "@formulajs/formulajs"

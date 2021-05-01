@@ -70,8 +70,8 @@ type RegisterState = {
   sendDefaultConfigValues = () => {
     
     const configsBody = { config: {
-      interestRate: 4,
-      downPmt: 5,
+      interestRate: .0425,
+      downPmt: .20,
       insuranceRate: 6,
       
     }};
