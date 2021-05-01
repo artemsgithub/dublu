@@ -125,7 +125,7 @@ export class ViewListings extends Component<
       </TableHead>
       <TableBody>
         {this.state.listings.map((listing, index)  => (
-          <Listing  key={index} listing={listing} configs={this.state.configs} />
+          <Listing key={index} listing={listing} configs={this.state.configs} />
         ))}
       </TableBody>
     </Table>

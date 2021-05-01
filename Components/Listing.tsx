@@ -21,16 +21,20 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 
+import { EditListing } from '../Components/EditListing'
+
 // @ts-ignore 
 import * as formulajs from '@formulajs/formulajs' 
 
 interface ListingProps { 
     listing: any
     configs: any
+   
 }
 
 type ListingState={
-  open: any
+  open: boolean
+  isEditOpen: boolean
 }
 
 
@@ -41,16 +45,25 @@ export class Listing extends Component <ListingProps, ListingState> {
       super(props) 
       this.state = {
         open: false,
+        isEditOpen: false,
       }
     }
       
     handleClickOpen = () => {
       this.setState({ open: true });
     };
-
     handleClose = () => {
       this.setState({ open: false });
     };
+
+    handleEditOpen = () => {
+      this.setState({ isEditOpen: true })
+    }
+    handleEditClose = () => {
+      this.setState({ isEditOpen: false})
+    }
+
+
 
       // const { listing , configs } = this.props
       // console.log(this.props.configs?.[0].interestRate)
@@ -122,12 +135,23 @@ export class Listing extends Component <ListingProps, ListingState> {
           <TableCell>{this.totalMonthlyProfit()}</TableCell>
 
   
-          <TableCell align="right"><IconButton size="small" ><FiEdit/></IconButton></TableCell>
+          <TableCell align="right"><IconButton size="small" onClick={this.handleEditOpen} ><FiEdit/></IconButton></TableCell>
           <TableCell align="right"><IconButton size="small" ><FiMapPin/></IconButton></TableCell>
           <TableCell align="right"><IconButton size="small" onClick={this.handleClickOpen}><MdMoreVert/></IconButton></TableCell>
           <TableCell align="right"><IconButton size="small" onClick={() => this.handleDelete(this.props.listing.id)}><RiDeleteBin6Line/></IconButton></TableCell>
         </TableRow>
-
+        <Dialog 
+        open={this.state.isEditOpen}
+        onClose={this.handleEditClose}
+        >
+        <EditListing 
+        propertyAddress={this.props.listing.propertyAddress}
+        comments={this.props.listing.comments}
+        askingPrice={this.props.listing.askingPrice}
+        semiTax={this.props.listing.semiTax}
+        estIncome={this.props.listing.estIncome}
+        />
+        </Dialog>
         <Dialog
         open={this.state.open}
         onClose={this.handleClose}
