@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import { FiEdit, FiMapPin } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri"
-import { CgDetailsMore } from "react-icons/cg"
+import { MdMoreVert } from "react-icons/md"
 import { BsHouse } from "react-icons/bs"
 
 import Paper from '@material-ui/core/Paper'
@@ -57,12 +57,12 @@ export class Listing extends Component <ListingProps, ListingState> {
       handlePmt = () => {
         // PMT (interestRate/12, 360, AskingPrice-DownPMT, 0)*-1
         let downPmtValue = (this.props.configs?.[0].downPmt)*this.props.listing.askingPrice
-        return `$${Math.round(formulajs.PMT(this.props.configs?.[0].interestRate/12, 360, this.props.listing.askingPrice-downPmtValue, 0)*-1)}`
+        return Math.round(formulajs.PMT(this.props.configs?.[0].interestRate/12, 360, this.props.listing.askingPrice-downPmtValue, 0)*-1)
       }
 
       handleEscrow = () => {
         // SemiTax*12/2
-        return Math.round(this.props.listing.semiTax*2/12)
+      return Math.round(this.props.listing.semiTax*2/12)
       }
       
       handleMortgageIns = () => {
@@ -78,6 +78,17 @@ export class Listing extends Component <ListingProps, ListingState> {
         return Math.round(this.props.listing.askingPrice*this.props.configs?.[0].insuranceRate/12)
       }
 
+      totalMonthlyPmt = () => {
+        return this.handlePmt() + this.handleEscrow() + this.handleMortgageIns() + this.handleHomeOwnerIns()
+      }
+
+      totalMonthlyProfit = () => {
+        return this.props.listing.estIncome - this.totalMonthlyPmt()
+      }
+
+      totalYearlyProfit = () => {
+        return this.totalMonthlyProfit()*12
+      }
 
       handleDelete = (id: number) => {
         
@@ -97,6 +108,8 @@ export class Listing extends Component <ListingProps, ListingState> {
       
       render() {  
   
+
+
         return (
       <>
           <TableRow>
@@ -105,13 +118,13 @@ export class Listing extends Component <ListingProps, ListingState> {
           <TableCell>{this.props.listing.askingPrice}</TableCell>
           <TableCell>{this.props.listing.semiTax}</TableCell>
           <TableCell>{this.props.listing.estIncome}</TableCell>
-  
-        
-          
+          <TableCell>{this.totalMonthlyPmt()}</TableCell>
+          <TableCell>{this.totalMonthlyProfit()}</TableCell>
 
+  
           <TableCell align="right"><IconButton size="small" ><FiEdit/></IconButton></TableCell>
           <TableCell align="right"><IconButton size="small" ><FiMapPin/></IconButton></TableCell>
-          <TableCell align="right"><IconButton size="small" onClick={this.handleClickOpen}><CgDetailsMore/></IconButton></TableCell>
+          <TableCell align="right"><IconButton size="small" onClick={this.handleClickOpen}><MdMoreVert/></IconButton></TableCell>
           <TableCell align="right"><IconButton size="small" onClick={() => this.handleDelete(this.props.listing.id)}><RiDeleteBin6Line/></IconButton></TableCell>
         </TableRow>
 
@@ -128,6 +141,10 @@ export class Listing extends Component <ListingProps, ListingState> {
           <div><strong>Mortgage Insurance: </strong>{this.handleMortgageIns()}</div>
           <div><strong>Escrow: </strong>{this.handleEscrow()}</div>
           <div><strong>Homeowners Insurance: </strong>{this.handleHomeOwnerIns()}</div>
+          <DialogContentText>
+          <h3>Profits</h3>
+          </DialogContentText>
+          <div><strong>Total Yearly Profit: </strong>{this.totalYearlyProfit()}</div>
 
      
         </DialogContent>

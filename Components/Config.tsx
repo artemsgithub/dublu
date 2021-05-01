@@ -26,9 +26,9 @@ export class Config extends Component <AddConfigProps, ConfigState> {
   constructor(props: AddConfigProps) {
     super(props) 
     this.state = {
-      interestRate: 0,
-      downPmt: 0,
-      insuranceRate: 0,
+      interestRate: .0425,
+      downPmt: .20,
+      insuranceRate: .0125,
     }
   }
 
@@ -50,6 +50,7 @@ export class Config extends Component <AddConfigProps, ConfigState> {
   //  update config values to personal prefrence 
   handleSubmit = (event: any) => {
     event.preventDefault();
+    
     const configsBody = { config: {
       interestRate: this.state.interestRate,
       downPmt: this.state.downPmt,

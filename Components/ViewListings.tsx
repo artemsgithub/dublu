@@ -107,6 +107,8 @@ export class ViewListings extends Component<
           <TableCell><strong>Asking Price</strong></TableCell>
           <TableCell><strong>SemiTax</strong></TableCell>
           <TableCell><strong>Monthly Income</strong></TableCell>
+          <TableCell><strong>Monthly Payment</strong></TableCell>
+          <TableCell><strong>Monthly Profit</strong></TableCell>
        
        
           
