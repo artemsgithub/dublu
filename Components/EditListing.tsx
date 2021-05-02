@@ -16,6 +16,7 @@ interface EditListingProps {
   askingPrice: number
   semiTax: number
   estIncome: number
+  id: number
 }
 
 type EditListingState = {
@@ -64,7 +65,7 @@ setEstimatedIncome = (event: any) => {
   this.setState({ estIncome: event.target.value})
 }
 
-handleSubmit = (event: any) => {
+handleSubmit = (id: number) => {
 
   const listingsBody = { listing: {
     propertyAddress: this.state.propertyAddress,
@@ -74,7 +75,7 @@ handleSubmit = (event: any) => {
     estIncome: this.state.estIncome,
   }};
 
-  fetch(`http://localhost:3000/listings/edit`, {
+  fetch(`http://localhost:3000/listings/edit/${this.props.id}`, {
     method: "PUT",
     headers: new Headers({
       "Content-Type": "application/json",
@@ -85,12 +86,19 @@ handleSubmit = (event: any) => {
   })
     .then((response ) => response.json())
 
-}
+  
+  }
 
+  componentDidUpdate() {
+    console.log(this.props.id)
+  }
+  
   render() {
-   
+
+    console.log(this.props.id)
+
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={()=> this.handleSubmit(this.props.id)}>
         <DialogTitle
           id="form-dialog-title"
          

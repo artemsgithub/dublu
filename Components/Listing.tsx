@@ -21,7 +21,10 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 
+
+
 import { EditListing } from '../Components/EditListing'
+import { Map } from '../Components/Map'
 
 // @ts-ignore 
 import * as formulajs from '@formulajs/formulajs' 
@@ -35,6 +38,7 @@ interface ListingProps {
 type ListingState={
   open: boolean
   isEditOpen: boolean
+  isMapOpen: boolean
 }
 
 
@@ -46,6 +50,7 @@ export class Listing extends Component <ListingProps, ListingState> {
       this.state = {
         open: false,
         isEditOpen: false,
+        isMapOpen: false,
       }
     }
       
@@ -63,6 +68,13 @@ export class Listing extends Component <ListingProps, ListingState> {
       this.setState({ isEditOpen: false})
     }
 
+    handleMapOpen = () => {
+      this.setState({ isMapOpen: true });
+    };
+
+    handleMapClose = () => {
+      this.setState({ isMapOpen: false });
+    };
 
 
       // const { listing , configs } = this.props
@@ -72,12 +84,11 @@ export class Listing extends Component <ListingProps, ListingState> {
         let downPmtValue = (this.props.configs?.[0].downPmt)*this.props.listing.askingPrice
         return Math.round(formulajs.PMT(this.props.configs?.[0].interestRate/12, 360, this.props.listing.askingPrice-downPmtValue, 0)*-1)
       }
-
       handleEscrow = () => {
         // SemiTax*12/2
       return Math.round(this.props.listing.semiTax*2/12)
       }
-      
+    
       handleMortgageIns = () => {
         // 1% of asking price, <.20 (min) then 0 
         if (this.props.configs?.[0].downPmt < .20) {
@@ -86,19 +97,15 @@ export class Listing extends Component <ListingProps, ListingState> {
           return 0 
         }
       }
-
       handleHomeOwnerIns = () => {
         return Math.round(this.props.listing.askingPrice*this.props.configs?.[0].insuranceRate/12)
       }
-
       totalMonthlyPmt = () => {
         return this.handlePmt() + this.handleEscrow() + this.handleMortgageIns() + this.handleHomeOwnerIns()
       }
-
       totalMonthlyProfit = () => {
         return this.props.listing.estIncome - this.totalMonthlyPmt()
       }
-
       totalYearlyProfit = () => {
         return this.totalMonthlyProfit()*12
       }
@@ -136,10 +143,17 @@ export class Listing extends Component <ListingProps, ListingState> {
 
   
           <TableCell align="right"><IconButton size="small" onClick={this.handleEditOpen} ><FiEdit/></IconButton></TableCell>
-          <TableCell align="right"><IconButton size="small" ><FiMapPin/></IconButton></TableCell>
+          <TableCell align="right"><IconButton size="small" onClick={this.handleMapOpen}><FiMapPin/></IconButton></TableCell>
           <TableCell align="right"><IconButton size="small" onClick={this.handleClickOpen}><MdMoreVert/></IconButton></TableCell>
           <TableCell align="right"><IconButton size="small" onClick={() => this.handleDelete(this.props.listing.id)}><RiDeleteBin6Line/></IconButton></TableCell>
         </TableRow>
+
+        <Dialog
+        open={this.state.isMapOpen}
+        onClose={this.handleMapClose}
+        >
+          <Map />
+        </Dialog>
         <Dialog 
         open={this.state.isEditOpen}
         onClose={this.handleEditClose}
@@ -150,6 +164,7 @@ export class Listing extends Component <ListingProps, ListingState> {
         askingPrice={this.props.listing.askingPrice}
         semiTax={this.props.listing.semiTax}
         estIncome={this.props.listing.estIncome}
+        id={this.props.listing.id}
         />
         </Dialog>
         <Dialog
