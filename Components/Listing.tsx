@@ -23,8 +23,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 
 
 
-import { EditListing } from '../Components/EditListing'
-import { Map } from '../Components/Map'
+import  { EditListing }  from '../Components/EditListing'
+import Map from '../Components/Map'
 
 // @ts-ignore 
 import * as formulajs from '@formulajs/formulajs' 
@@ -35,7 +35,7 @@ interface ListingProps {
    
 }
 
-type ListingState={
+type ListingState ={
   open: boolean
   isEditOpen: boolean
   isMapOpen: boolean
@@ -152,7 +152,8 @@ export class Listing extends Component <ListingProps, ListingState> {
         open={this.state.isMapOpen}
         onClose={this.handleMapClose}
         >
-          <Map />
+       
+        <Map propertyAddress={this.props.listing.propertyAddress} />
         </Dialog>
         <Dialog 
         open={this.state.isEditOpen}

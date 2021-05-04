@@ -17,7 +17,7 @@ import { Listing } from '../Components/Listing'
 
 
 interface ViewLisitngsProps {
-
+  
 }
 
 type ViewListingState = {
