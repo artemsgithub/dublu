@@ -22,9 +22,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 
 
-
 import  { EditListing }  from '../Components/EditListing'
 import Map from '../Components/Map'
+import Meter from '../Components/Meter'
 
 // @ts-ignore 
 import * as formulajs from '@formulajs/formulajs' 
@@ -39,6 +39,7 @@ type ListingState ={
   open: boolean
   isEditOpen: boolean
   isMapOpen: boolean
+  isSnackBarOpen: boolean
 }
 
 
@@ -51,7 +52,12 @@ export class Listing extends Component <ListingProps, ListingState> {
         open: false,
         isEditOpen: false,
         isMapOpen: false,
+        isSnackBarOpen: false,
       }
+    }
+
+    handleSnackBarOpen = () => {
+      this.setState({ isSnackBarOpen: true})
     }
       
     handleClickOpen = () => {
@@ -77,12 +83,18 @@ export class Listing extends Component <ListingProps, ListingState> {
     };
 
 
+
+
       // const { listing , configs } = this.props
       // console.log(this.props.configs?.[0].interestRate)
+      downPaymentValue = () => {
+        return Math.round((this.props.configs?.[0].downPmt)*this.props.listing.askingPrice)
+      }
+
       handlePmt = () => {
         // PMT (interestRate/12, 360, AskingPrice-DownPMT, 0)*-1
         let downPmtValue = (this.props.configs?.[0].downPmt)*this.props.listing.askingPrice
-        return Math.round(formulajs.PMT(this.props.configs?.[0].interestRate/12, 360, this.props.listing.askingPrice-downPmtValue, 0)*-1)
+        return Math.round(formulajs.PMT(this.props.configs?.[0].interestRate/12, 360, this.props.listing.askingPrice-downPmtValue,)*-1)
       }
       handleEscrow = () => {
         // SemiTax*12/2
@@ -109,6 +121,13 @@ export class Listing extends Component <ListingProps, ListingState> {
       totalYearlyProfit = () => {
         return this.totalMonthlyProfit()*12
       }
+      totalYearlyCost = () => {
+        return this.totalMonthlyPmt()*12
+      }
+
+      dubluRating = () => {
+        return ((this.totalYearlyProfit()/this.downPaymentValue())*100).toFixed(2)
+      }
 
       handleDelete = (id: number) => {
         
@@ -124,7 +143,6 @@ export class Listing extends Component <ListingProps, ListingState> {
       }
       
 
-   
       
       render() {  
   
@@ -133,6 +151,7 @@ export class Listing extends Component <ListingProps, ListingState> {
         return (
       <>
           <TableRow>
+          <TableCell><Meter dubluRating={this.dubluRating()}/></TableCell>
           <TableCell>{this.props.listing.propertyAddress}</TableCell>
           <TableCell>{this.props.listing.comments}</TableCell>
           <TableCell>{this.props.listing.askingPrice}</TableCell>
@@ -184,6 +203,7 @@ export class Listing extends Component <ListingProps, ListingState> {
           <div><strong>Mortgage Insurance: </strong>{this.handleMortgageIns()}</div>
           <div><strong>Escrow: </strong>{this.handleEscrow()}</div>
           <div><strong>Homeowners Insurance: </strong>{this.handleHomeOwnerIns()}</div>
+          <div><strong>Down Payment Total: </strong>{this.downPaymentValue()}</div>
           <DialogContentText>
           <h3>Profits</h3>
           </DialogContentText>
@@ -198,6 +218,8 @@ export class Listing extends Component <ListingProps, ListingState> {
 
         <div></div>
         </Dialog>
+
+     
         </>
  
         )

@@ -102,7 +102,7 @@ export class ViewListings extends Component<
               <Table style={styles.table} size="small">
      <TableHead style={{backgroundColor: '#0069c0'}}>
         <TableRow>
-
+          <TableCell style={{color: 'white'}}><strong>Dulbu Rating</strong></TableCell>
           <TableCell style={{color: 'white'}}><strong>Property Address</strong></TableCell>
           <TableCell style={{color: 'white'}}><strong>Comments</strong></TableCell>
           <TableCell style={{color: 'white'}}><strong>Asking Price</strong></TableCell>

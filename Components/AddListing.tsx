@@ -9,6 +9,8 @@ import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
 
 interface AddListingProps {
   open: boolean;
@@ -22,6 +24,7 @@ type ListingState = {
   askingPrice: number
   semiTax: number
   estIncome: number
+  isSnackBarOpen: boolean
 };
 
 export class AddListing extends Component<AddListingProps, ListingState> {
@@ -33,10 +36,16 @@ export class AddListing extends Component<AddListingProps, ListingState> {
       askingPrice: 0, 
       semiTax: 0,
       estIncome: 0,
+      isSnackBarOpen: false
     };
   }
 
   // FUNCTIONS TO CAPTURE USER INPUT 
+
+  handleSnackBarOpen = () => {
+
+    this.setState({ isSnackBarOpen: true})
+  }
 
   setPropertyAddress = (event: any) => {
     this.setState({ propertyAddress: event.target.value });
@@ -63,7 +72,8 @@ setEstimatedIncome = (event: any) => {
 }
 
 handleSubmit = (event: any) => {
-
+  event.preventDefault();
+  setTimeout(function(){location.reload()}, 1420.69);
   const listingsBody = { listing: {
     propertyAddress: this.state.propertyAddress,
     comments: this.state.comments,
@@ -83,10 +93,11 @@ handleSubmit = (event: any) => {
   })
     .then((response ) => response.json())
 
-}
+} //last curly for handle submit
 
 
   render() {
+    
     return (
       <Dialog
         open={this.props.open}
@@ -191,7 +202,7 @@ handleSubmit = (event: any) => {
             Cancel
           </Button>
           <Button 
-          onClick={this.props.handleClose} 
+          onClick={this.handleSnackBarOpen}
           color="primary"
           type="submit"
           >
@@ -199,6 +210,11 @@ handleSubmit = (event: any) => {
           </Button>
         </DialogActions>
           </form>
+          <Snackbar style={{marginTop:'20%'}} anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={this.state.isSnackBarOpen} autoHideDuration={9000} >
+        <Alert  severity="success">
+          Listing Added! 
+        </Alert>
+      </Snackbar>
       </Dialog>
     );
   }
