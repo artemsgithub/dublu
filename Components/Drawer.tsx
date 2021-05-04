@@ -6,7 +6,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
-
+import Tooltip from "@material-ui/core/Tooltip"
 
 import { AiFillFileAdd } from "react-icons/ai";
 import { AiFillSetting } from "react-icons/ai";
@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme: Theme) =>
     appBar: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
+      backgroundColor: '#2196f3'
     },
     drawer: {
       width: drawerWidth,
@@ -98,33 +99,40 @@ export default function PermanentDrawerLeft() {
     
     <div className={classes.root}>
       <CssBaseline />
+      
       <AppBar position="absolute" className={classes.appBar} style={{background: "" }}>
         <Toolbar>
           <div >
             <Logo />
           </div>
           {/* ICON ADD LISTING */}
+          <Tooltip title="Add Listing"> 
           <IconButton
+      
             color="inherit"
             className={classes.iconStyle}
             onClick={handleClickOpen}
           >
             <AiFillFileAdd />
           </IconButton>
+          </Tooltip>
 
           {/* ADD LISTING*/}
          <AddListing classes={classes} open={isAddListingOpen} handleClose={handleClose} /> 
 
           {/* ICON BUTTON CONFIG */}
+          <Tooltip title="Edit Configs">
           <IconButton color="inherit" onClick={handleConfigOpen}>
             <AiFillSetting />
           </IconButton>
-
+          </Tooltip>
           {/* CONFIG UNIVERSAL PARAMS */}
         <Config classes={classes} open={isConfigOpen} handleClose={handleConfigClose} />
+        <Tooltip title="Logout">
         <IconButton color="inherit" onClick={handleLogout}>
           <BiLogOut/>
         </IconButton>
+        </Tooltip>
         </Toolbar>
       </AppBar>
 

@@ -16,7 +16,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import Link from '@material-ui/core/Link';
 import Card from '@material-ui/core/Card'
 import Dialog from '@material-ui/core/Dialog'
-import { DialogTitle } from '@material-ui/core';
+import { CardActionArea, DialogTitle, CardMedia, CardContent } from '@material-ui/core';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
@@ -173,6 +173,9 @@ export class Listing extends Component <ListingProps, ListingState> {
         onClose={this.handleClose}
         >
         <DialogTitle><BsHouse/>{`  `}<strong>{this.props.listing.propertyAddress}</strong></DialogTitle>
+        <Card>
+        <CardActionArea>
+        <CardContent>
         <DialogContent>
           <DialogContentText>
           <h3>Expenses</h3>
@@ -188,6 +191,10 @@ export class Listing extends Component <ListingProps, ListingState> {
 
      
         </DialogContent>
+
+        </CardContent>
+        </CardActionArea>
+          </Card>
 
         <div></div>
         </Dialog>

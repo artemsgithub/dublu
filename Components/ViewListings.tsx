@@ -87,7 +87,8 @@ export class ViewListings extends Component<
 
       const styles = {
           table: {
-              minWidth: '650'
+              minWidth: '650',
+            
           }
       }
       
@@ -96,28 +97,28 @@ export class ViewListings extends Component<
           <React.Fragment>
 
           <div>
-              <h2 style={{marginLeft: '2vh', marginTop: '4vh'}}>View Listings</h2>
-              <TableContainer component={Paper}>
+            <div style={{padding: '1px', height: '70px' }}>  <h2 style={{marginLeft: '2vh', marginTop: '3.5vh'}}>View Listings</h2></div>
+              <TableContainer style={{width: '98.69%', margin: 'auto'}} component={Paper}>
               <Table style={styles.table} size="small">
-     <TableHead>
+     <TableHead style={{backgroundColor: '#0069c0'}}>
         <TableRow>
 
-          <TableCell><strong>Property Address</strong></TableCell>
-          <TableCell><strong>Comments</strong></TableCell>
-          <TableCell><strong>Asking Price</strong></TableCell>
-          <TableCell><strong>SemiTax</strong></TableCell>
-          <TableCell><strong>Monthly Income</strong></TableCell>
-          <TableCell><strong>Monthly Payment</strong></TableCell>
-          <TableCell><strong>Monthly Profit</strong></TableCell>
+          <TableCell style={{color: 'white'}}><strong>Property Address</strong></TableCell>
+          <TableCell style={{color: 'white'}}><strong>Comments</strong></TableCell>
+          <TableCell style={{color: 'white'}}><strong>Asking Price</strong></TableCell>
+          <TableCell style={{color: 'white'}}><strong>SemiTax</strong></TableCell>
+          <TableCell style={{color: 'white'}}><strong>Monthly Income</strong></TableCell>
+          <TableCell style={{color: 'white'}}><strong>Monthly Payment</strong></TableCell>
+          <TableCell style={{color: 'white'}}><strong>Monthly Profit</strong></TableCell>
        
        
           
 
 
-          <TableCell align="right"><strong>Edit</strong></TableCell>
-          <TableCell align="right"><strong>Map</strong></TableCell>
-          <TableCell align="right"><strong>More</strong></TableCell>
-          <TableCell align="right"><strong>Delete</strong></TableCell>
+          <TableCell style={{color: 'white'}} align="right"><strong>Edit</strong></TableCell>
+          <TableCell style={{color: 'white'}} align="right"><strong>Map</strong></TableCell>
+          <TableCell style={{color: 'white'}} align="right"><strong>More</strong></TableCell>
+          <TableCell style={{color: 'white'}} align="right"><strong>Delete</strong></TableCell>
 
           
 

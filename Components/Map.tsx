@@ -45,7 +45,7 @@ export default class Map extends Component <MapProps, MapState> {
   render() {
     return (
       <div>
-        <h1>{this.props.propertyAddress}</h1>
+        <h1 style={{marginLeft: '10px'}}>{this.props.propertyAddress}</h1>
         <LoadScript googleMapsApiKey="AIzaSyALtJXluvEpi-4NZWvA1Hdbt8G7m0Wi6J4">
           <GoogleMap
             mapContainerStyle={containerStyle}
