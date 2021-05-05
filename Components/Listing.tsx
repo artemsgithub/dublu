@@ -25,6 +25,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import  { EditListing }  from '../Components/EditListing'
 import Map from '../Components/Map'
 import Meter from '../Components/Meter'
+// import '../src/App.css'
 
 // @ts-ignore 
 import * as formulajs from '@formulajs/formulajs' 
@@ -41,6 +42,7 @@ type ListingState ={
   isMapOpen: boolean
   isSnackBarOpen: boolean
 }
+
 
 
 export class Listing extends Component <ListingProps, ListingState> {
@@ -150,7 +152,7 @@ export class Listing extends Component <ListingProps, ListingState> {
 
         return (
       <>
-          <TableRow>
+          <TableRow className="tableHover">
           <TableCell><Meter dubluRating={this.dubluRating()}/></TableCell>
           <TableCell>{this.props.listing.propertyAddress}</TableCell>
           <TableCell>{this.props.listing.comments}</TableCell>

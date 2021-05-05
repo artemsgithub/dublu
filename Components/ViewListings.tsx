@@ -95,10 +95,10 @@ export class ViewListings extends Component<
       return (
          
           <React.Fragment>
-
+            
           <div>
             <div style={{padding: '1px', height: '70px' }}>  <h2 style={{marginLeft: '2vh', marginTop: '3.5vh'}}>View Listings</h2></div>
-              <TableContainer style={{width: '98.69%', margin: 'auto'}} component={Paper}>
+              <TableContainer style={{width: '98.69%', margin: 'auto', }} component={Paper}>
               <Table style={styles.table} size="small">
      <TableHead style={{backgroundColor: '#0069c0'}}>
         <TableRow>
@@ -123,7 +123,7 @@ export class ViewListings extends Component<
           
 
         </TableRow>
-      </TableHead>
+      </TableHead>  
       <TableBody>
         {this.state.listings.map((listing, index)  => (
           <Listing key={index} listing={listing} configs={this.state.configs} />

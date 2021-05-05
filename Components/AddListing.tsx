@@ -98,6 +98,11 @@ handleSubmit = (event: any) => {
 
   render() {
     
+    const snackBarStyles = {
+      marginTop:'20%',
+      boxShadow: "rgba(0, 0, 0, 0.56) 0px 22px 70px 4px",
+    }
+
     return (
       <Dialog
         open={this.props.open}
@@ -210,7 +215,7 @@ handleSubmit = (event: any) => {
           </Button>
         </DialogActions>
           </form>
-          <Snackbar style={{marginTop:'20%'}} anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={this.state.isSnackBarOpen} autoHideDuration={9000} >
+          <Snackbar style={snackBarStyles} anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={this.state.isSnackBarOpen} autoHideDuration={9000} >
         <Alert  severity="success">
           Listing Added! 
         </Alert>
