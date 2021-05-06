@@ -5,6 +5,7 @@ import { RiDeleteBin6Line } from "react-icons/ri"
 import { MdMoreVert } from "react-icons/md"
 import { BsHouse } from "react-icons/bs"
 
+// material ui imports
 import Paper from '@material-ui/core/Paper'
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -20,6 +21,9 @@ import { CardActionArea, DialogTitle, CardMedia, CardContent } from '@material-u
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
+
+// number format 
+import NumberFormat from 'react-number-format';
 
 
 import  { EditListing }  from '../Components/EditListing'
@@ -148,7 +152,7 @@ export class Listing extends Component <ListingProps, ListingState> {
       
       render() {  
   
-
+        
 
         return (
       <>
@@ -156,11 +160,11 @@ export class Listing extends Component <ListingProps, ListingState> {
           <TableCell><Meter dubluRating={this.dubluRating()}/></TableCell>
           <TableCell>{this.props.listing.propertyAddress}</TableCell>
           <TableCell>{this.props.listing.comments}</TableCell>
-          <TableCell>{this.props.listing.askingPrice}</TableCell>
-          <TableCell>{this.props.listing.semiTax}</TableCell>
-          <TableCell>{this.props.listing.estIncome}</TableCell>
-          <TableCell>{this.totalMonthlyPmt()}</TableCell>
-          <TableCell>{this.totalMonthlyProfit()}</TableCell>
+          <TableCell>{new Intl.NumberFormat().format(this.props.listing.askingPrice)}</TableCell>
+          <TableCell>{new Intl.NumberFormat().format(this.props.listing.semiTax)}</TableCell>
+          <TableCell>{new Intl.NumberFormat().format(this.props.listing.estIncome)}</TableCell>
+          <TableCell>{new Intl.NumberFormat().format(this.totalMonthlyPmt())}</TableCell>
+          <TableCell>{new Intl.NumberFormat().format(this.totalMonthlyProfit())}</TableCell>
 
   
           <TableCell align="right"><IconButton size="small" onClick={this.handleEditOpen} ><FiEdit/></IconButton></TableCell>
@@ -202,15 +206,15 @@ export class Listing extends Component <ListingProps, ListingState> {
           <h3 style={{marginTop:'-20px'}}>Expenses</h3>
           </DialogContentText>
          
-          <div style={{margin: '5px'}}><strong>Monthly Mortgage Payment: </strong>{this.handlePmt()}</div>
-          <div style={{margin: '5px'}}><strong>Mortgage Insurance: </strong>{this.handleMortgageIns()}</div>
-          <div style={{margin: '5px'}}><strong>Escrow: </strong>{this.handleEscrow()}</div>
-          <div style={{margin: '5px'}}><strong>Homeowners Insurance: </strong>{this.handleHomeOwnerIns()}</div>
-          <div style={{margin: '5px'}}><strong>Down Payment Total: </strong>{this.downPaymentValue()}</div>
+          <div style={{margin: '5px'}}><strong>Monthly Mortgage Payment: </strong>{new Intl.NumberFormat().format(this.handlePmt())}</div>
+          <div style={{margin: '5px'}}><strong>Mortgage Insurance: </strong>{new Intl.NumberFormat().format(this.handleMortgageIns())}</div>
+          <div style={{margin: '5px'}}><strong>Escrow: </strong>{new Intl.NumberFormat().format(this.handleEscrow())}</div>
+          <div style={{margin: '5px'}}><strong>Homeowners Insurance: </strong>{new Intl.NumberFormat().format(this.handleHomeOwnerIns())}</div>
+          <div style={{margin: '5px'}}><strong>Down Payment Total: </strong>{new Intl.NumberFormat().format(this.downPaymentValue())}</div>
           <DialogContentText>
           <h3>Profits</h3>
           </DialogContentText>
-          <div style={{margin: '5px'}}><strong>Total Yearly Profit: </strong>{this.totalYearlyProfit()}</div>
+          <div style={{margin: '5px'}}><strong>Total Yearly Profit: </strong>{new Intl.NumberFormat().format(this.totalYearlyProfit())}</div>
      
         </DialogContent>
 
