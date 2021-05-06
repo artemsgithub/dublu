@@ -25,7 +25,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import  { EditListing }  from '../Components/EditListing'
 import Map from '../Components/Map'
 import Meter from '../Components/Meter'
-// import '../src/App.css'
+
 
 // @ts-ignore 
 import * as formulajs from '@formulajs/formulajs' 
@@ -199,18 +199,18 @@ export class Listing extends Component <ListingProps, ListingState> {
         <CardContent>
         <DialogContent>
           <DialogContentText>
-          <h3>Expenses</h3>
+          <h3 style={{marginTop:'-20px'}}>Expenses</h3>
           </DialogContentText>
-          <div><strong>Monthly Mortgage Payment: </strong>{this.handlePmt()}</div>
-          <div><strong>Mortgage Insurance: </strong>{this.handleMortgageIns()}</div>
-          <div><strong>Escrow: </strong>{this.handleEscrow()}</div>
-          <div><strong>Homeowners Insurance: </strong>{this.handleHomeOwnerIns()}</div>
-          <div><strong>Down Payment Total: </strong>{this.downPaymentValue()}</div>
+         
+          <div style={{margin: '5px'}}><strong>Monthly Mortgage Payment: </strong>{this.handlePmt()}</div>
+          <div style={{margin: '5px'}}><strong>Mortgage Insurance: </strong>{this.handleMortgageIns()}</div>
+          <div style={{margin: '5px'}}><strong>Escrow: </strong>{this.handleEscrow()}</div>
+          <div style={{margin: '5px'}}><strong>Homeowners Insurance: </strong>{this.handleHomeOwnerIns()}</div>
+          <div style={{margin: '5px'}}><strong>Down Payment Total: </strong>{this.downPaymentValue()}</div>
           <DialogContentText>
           <h3>Profits</h3>
           </DialogContentText>
-          <div><strong>Total Yearly Profit: </strong>{this.totalYearlyProfit()}</div>
-
+          <div style={{margin: '5px'}}><strong>Total Yearly Profit: </strong>{this.totalYearlyProfit()}</div>
      
         </DialogContent>
 

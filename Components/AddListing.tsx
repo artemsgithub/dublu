@@ -215,7 +215,7 @@ handleSubmit = (event: any) => {
           </Button>
         </DialogActions>
           </form>
-          <Snackbar style={snackBarStyles} anchorOrigin={{vertical: 'top', horizontal: 'center'}} open={this.state.isSnackBarOpen} autoHideDuration={9000} >
+          <Snackbar style={snackBarStyles} anchorOrigin={{vertical: 'bottom', horizontal: 'center'}} open={this.state.isSnackBarOpen} autoHideDuration={9000} >
         <Alert  severity="success">
           Listing Added! 
         </Alert>
