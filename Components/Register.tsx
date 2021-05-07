@@ -13,6 +13,7 @@ import LogoLarge from '../Assets/LogoLarge'
 import { withRouter } from 'react-router-dom'
 
 
+
 type RegisterProps = {
   updateToken: any
   token: string
@@ -136,6 +137,7 @@ type RegisterState = {
               style={styles.form}
             >
             
+           
                   <TextField
                     style={styles.txtField}
                     variant="outlined"

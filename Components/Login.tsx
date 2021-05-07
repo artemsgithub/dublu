@@ -17,6 +17,8 @@ import Avatar from "@material-ui/core/Avatar";
 import LogoLarge from '../Assets/LogoLarge'
 import {Description} from '../Components/Description'
 
+import logo from '../Assets/logoFat.png'
+
 type LoginProps = {
   updateToken: any;
   token: string;
@@ -119,13 +121,22 @@ class Login extends React.Component<LoginProps, LoginState> {
         textDecoration: "none"
       }
 
+      
     };
+
+
+    const logoStyle = {
+      width: '50px',
+      height: '50px'
+    }
+
     return (
       <Grid container component="main" style={styles.root}>
         <CssBaseline />
         <Grid item xs={false} sm={4} md={7} style={styles.image} />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <div style={styles.paper}>
+            <img style={logoStyle} src={logo}></img>
             <LogoLarge />
             <Typography component="h1" variant="h5">
               Log in
