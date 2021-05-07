@@ -12,6 +12,10 @@ import Container from "@material-ui/core/Container";
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
 
+// number format 
+import NumberFormat from 'react-number-format';
+
+
 interface AddListingProps {
   open: boolean;
   handleClose: () => void;
@@ -77,9 +81,9 @@ handleSubmit = (event: any) => {
   const listingsBody = { listing: {
     propertyAddress: this.state.propertyAddress,
     comments: this.state.comments,
-    askingPrice: this.state.askingPrice,
-    semiTax: this.state.semiTax,
-    estIncome: this.state.estIncome,
+    askingPrice: parseInt((this.state.askingPrice).split(',').join(''),10),
+    semiTax: parseInt((this.state.semiTax).split(',').join(''),10),
+    estIncome: parseInt((this.state.estIncome).split(',').join(''),10),
   }};
 
   fetch(`http://localhost:3000/listings/create`, {
@@ -97,6 +101,27 @@ handleSubmit = (event: any) => {
 
 
   render() {
+
+    const inputFieldStyles = {
+      color: "rgba(0, 0, 0, 0.54)",
+      padding: "8px",
+      textAlign: "center",
+      paddingLeft: 8, 
+      font: "inherit",
+      width: "100%",
+      border: "0",
+      height: "1.1876em",
+      margin: "0",
+      display: "block",
+      minWidth: "0",
+      background: "none",
+      boxSizing: "content-box",
+      animationName: "mui-auto-fill-cancel",
+      letterSpacing: "inherit",
+      animationDuration: "10ms",
+      WebkitTapHighlightColor: "transparent",
+      outline: 'none'
+    }
     
     const snackBarStyles = {
       marginTop:'20%',
@@ -133,7 +158,6 @@ handleSubmit = (event: any) => {
                   <Paper className={this.props.classes.paper}>
 
     {/* ADDRESS INPUT */}
-
                     <TextField
                       id="standard-full-width"
                       label="Address"
@@ -143,6 +167,7 @@ handleSubmit = (event: any) => {
                       margin="normal"
                       onChange={this.setPropertyAddress.bind(this)}
                     />
+                   
                   </Paper>
                 </Grid>
                 <Grid item xs={12}>
@@ -161,36 +186,43 @@ handleSubmit = (event: any) => {
                 <Grid item xs={6}>
                   <Paper className={this.props.classes.paper}>
                {/* ASKING PRICE INPUT */}
-                    <TextField
-                      id="standard-full-width"
-                      label="Asking Price"
-                      style={{ paddingLeft: 8 }}
-                      fullWidth
-                      margin="normal"
-                      onChange={this.setAskingPrice.bind(this)}
-                    />
+                    Asking Price
+                    <NumberFormat
+                     thousandSeparator={true}
+                     id="standard-full-width"
+                     label="Asking Price"
+                     style={inputFieldStyles}
+                     fullWidth
+                     margin="normal"
+                     onChange={this.setAskingPrice.bind(this)}>
+                      </NumberFormat>
                   </Paper>
                 </Grid>
                 <Grid item xs={6}>
                   <Paper className={this.props.classes.paper}>
                     {/* SEMI TAX INPUT */}
-                    <TextField
+                    SemiTax 
+                    <NumberFormat
+                     thousandSeparator={true}
                       id="standard-full-width"
                       label="Semi Tax"
-                      style={{ margin: 8 }}
+                      style={inputFieldStyles}
                       fullWidth
                       margin="normal"
                       onChange={this.setSemiTax.bind(this)}
+                      
                     />
                   </Paper>
                 </Grid>
                 <Grid item xs={6}>
                   <Paper className={this.props.classes.paper}>
                     {/* ESTIMATED INCOME INPUT */}
-                    <TextField
+                    Estimated Income
+                    <NumberFormat
+                     thousandSeparator={true}
                       id="standard-full-width"
                       label="Estimated Monthly Income"
-                      style={{ margin: 8 }}
+                      style={inputFieldStyles}
                       fullWidth
                       margin="normal"
                       onChange={this.setEstimatedIncome.bind(this)}
