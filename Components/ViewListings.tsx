@@ -97,10 +97,10 @@ export class ViewListings extends Component<
           <React.Fragment>
             
           <div>
-            <div style={{padding: '1px', height: '70px' }}>  <h2 style={{marginLeft: '2vh', marginTop: '3.5vh'}}>View Listings</h2></div>
+            <div style={{padding: '1px', height: '70px', marginBottom: '10px' }}>  <h2 style={{marginLeft: '2vh', marginTop: '3.5vh', color: '#af9bfc',  }}>View Listings</h2></div>
               <TableContainer style={{width: '98.69%', margin: 'auto', }} component={Paper}>
               <Table style={styles.table} size="small">
-     <TableHead style={{backgroundColor: '#0069c0'}}>
+     <TableHead style={{backgroundColor: '#008267' }}>
         <TableRow>
           <TableCell style={{color: 'white'}}><strong>Dulbu Rating</strong></TableCell>
           <TableCell style={{color: 'white'}}><strong>Property Address</strong></TableCell>

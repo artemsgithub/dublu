@@ -4,7 +4,7 @@ import Box from '@material-ui/core/Box'
 export class Description extends Component {
     render() {
         return (
-            <Box style={{padding: 8, justifyContent: 'left', alignItems: 'left'}}>
+            <Box className="paraFont" style={{padding: 8, justifyContent: 'left', alignItems: 'left'}}>
                 <h2>What is Dublu?</h2>
                 <div>Dublu is an app designed to organize the process of purchasing an investment property.</div>
                 <h2>Why is Dublu?</h2>

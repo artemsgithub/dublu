@@ -10,11 +10,11 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import NumberFormat from 'react-number-format';
+import { CSSProperties } from 'react';
 
 interface EditListingProps {
   propertyAddress: string
   comments: string
-  // this is not a cop out, i actually had to make these strings 
   askingPrice: any
   semiTax: any
   estIncome: any
@@ -24,9 +24,9 @@ interface EditListingProps {
 type EditListingState = {
   propertyAddress: string
   comments: string
-  askingPrice: number
-  semiTax: number
-  estIncome: number
+  askingPrice: string
+  semiTax: string
+  estIncome: string
   
 
 };
@@ -100,18 +100,18 @@ handleSubmit = (id: number) => {
 
     console.log(this.props.id)
 
-    const paperStyles = {
+    const paperStyles :CSSProperties = {
       padding: '8px',
       textAlign: "center",
       color: "rgba(0, 0, 0, 0.57)",
       outline: 'none'
     }
 
-    const inputFieldStyles = {
+    const inputFieldStyles :CSSProperties = {
       color: "rgba(0, 0, 0, 0.54)",
       padding: "8px",
       textAlign: "center",
-      paddingLeft: 8, 
+      paddingLeft: '8', 
       font: "inherit",
       width: "100%",
       border: "0",
@@ -132,6 +132,7 @@ handleSubmit = (id: number) => {
       <form onSubmit={()=> this.handleSubmit(this.props.id)}>
         <DialogTitle
           id="form-dialog-title"
+          style={{color: '#cc0074'}}
          
         >
           Edit Listing

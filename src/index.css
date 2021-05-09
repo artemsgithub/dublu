@@ -1,5 +1,23 @@
 .tableHover:hover {
   transition: box-shadow .3s;
   box-shadow: 0 0 11px rgba(33,33,33,.2); 
+  
+}
+/* 
+.MuiTableCell-root {
+  font-family: "Cabin", Sans-Serif !important;
+  font-size: 16px;
+} */
 
+
+
+
+h2 {Font-Family: 'Roboto Condensed', Sans-Serif;
+Font-Size: 1.7rem;
+
+}
+
+.paraFont {
+  Font-Family: 'Cabin', Sans-Serif;
+  Font-Size: 16px; 
 }

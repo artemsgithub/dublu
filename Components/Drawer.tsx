@@ -59,6 +59,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
     dialogueStyles: {
       backgroundColor: "#F9F9F9",
+      color: '#cc0074',
     },
   })
 );

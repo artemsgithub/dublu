@@ -148,14 +148,14 @@ export class Listing extends Component <ListingProps, ListingState> {
       }
       
 
-      
+     
       render() {  
   
         
 
         return (
       <>
-          <TableRow className="tableHover">
+          <TableRow style={{fontFamily: "'Cabin', Sans-Serif", fontSize: "16px" }} className="tableHover">
           <TableCell><Meter dubluRating={this.dubluRating()}/></TableCell>
           <TableCell>{this.props.listing.propertyAddress}</TableCell>
           <TableCell>{this.props.listing.comments}</TableCell>
@@ -214,7 +214,14 @@ export class Listing extends Component <ListingProps, ListingState> {
           <h3>Profits</h3>
           </DialogContentText>
           <div style={{margin: '5px'}}><strong>Total Yearly Profit: </strong>{new Intl.NumberFormat().format(this.totalYearlyProfit())}</div>
-     
+          <DialogContentText><h3>Config Values</h3></DialogContentText>
+          <div style={{margin: '5px'}}><strong>Interest Rate: </strong>{this.props.configs?.[0].interestRate}</div>
+          <div style={{margin: '5px'}}><strong>Down Payment </strong>{this.props.configs?.[0].downPmt}</div>
+          <div style={{margin: '5px'}}><strong>Insurance Rate </strong>{this.props.configs?.[0].insuranceRate}</div>
+
+
+
+
         </DialogContent>
 
         </CardContent>

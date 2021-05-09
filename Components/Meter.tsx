@@ -17,7 +17,7 @@ export default class Meter extends Component <MeterProps> {
                 <ReactSpeedometer
                     segments={3}
                     minValue={-400}
-                    maxValue={450}
+                    maxValue={420}
                     value={this.props.dubluRating}
                     width={90}
                     height={90}

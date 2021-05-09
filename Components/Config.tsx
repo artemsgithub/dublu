@@ -49,7 +49,6 @@ export class Config extends Component <AddConfigProps, ConfigState> {
 
   //  update config values to personal prefrence 
   handleSubmit = (event: any) => {
-    event.preventDefault();
     
     const configsBody = { config: {
       interestRate: this.state.interestRate,
@@ -84,7 +83,8 @@ export class Config extends Component <AddConfigProps, ConfigState> {
             </DialogTitle>
             <DialogContent className={this.props.classes.dialogueStyles}>
               <DialogContentText>
-                Please enter universal parameters
+                Please enter these percentages as decimals. For example, 4.5% would be .0425
+                Default values are .0425, .20, .0125 for interest rate, down payment, and insurance rate, respectively. 
               </DialogContentText>
               {/* START USERS INPUT */}
 
@@ -108,7 +108,7 @@ export class Config extends Component <AddConfigProps, ConfigState> {
                         <TextField
                           id="standard-full-width"
                           label="Down Payment"
-                          helperText="As percentage, for no down, use 1"
+                          helperText="For no down, use 1"
                           style={{ margin: 8 }}
                           fullWidth
                           margin="normal"
@@ -121,7 +121,6 @@ export class Config extends Component <AddConfigProps, ConfigState> {
                         <TextField
                           id="standard-full-width"
                           label="Insurance Rate"
-                          helperText="Percentage"
                           style={{ margin: 8 }}
                           fullWidth
                           margin="normal"

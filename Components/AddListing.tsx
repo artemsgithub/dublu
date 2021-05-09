@@ -14,6 +14,7 @@ import Alert from '@material-ui/lab/Alert';
 
 // number format 
 import NumberFormat from 'react-number-format';
+import { CSSProperties } from "@material-ui/styles";
 
 
 interface AddListingProps {
@@ -25,9 +26,9 @@ interface AddListingProps {
 type ListingState = {
   propertyAddress: string
   comments: string
-  askingPrice: number
-  semiTax: number
-  estIncome: number
+  askingPrice: string
+  semiTax: string
+  estIncome: string
   isSnackBarOpen: boolean
 };
 
@@ -37,9 +38,9 @@ export class AddListing extends Component<AddListingProps, ListingState> {
     this.state = {
       propertyAddress: "",
       comments: "",
-      askingPrice: 0, 
-      semiTax: 0,
-      estIncome: 0,
+      askingPrice: '0', 
+      semiTax: '0',
+      estIncome: '0',
       isSnackBarOpen: false
     };
   }
@@ -78,6 +79,7 @@ setEstimatedIncome = (event: any) => {
 handleSubmit = (event: any) => {
   event.preventDefault();
   setTimeout(function(){location.reload()}, 1420.69);
+
   const listingsBody = { listing: {
     propertyAddress: this.state.propertyAddress,
     comments: this.state.comments,
@@ -102,7 +104,7 @@ handleSubmit = (event: any) => {
 
   render() {
 
-    const inputFieldStyles = {
+    const inputFieldStyles :CSSProperties = {
       color: "rgba(0, 0, 0, 0.54)",
       padding: "8px",
       textAlign: "center",
