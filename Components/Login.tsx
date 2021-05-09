@@ -18,6 +18,7 @@ import LogoLarge from '../Assets/LogoLarge'
 import {Description} from '../Components/Description'
 
 import logo from '../Assets/logoFat.png'
+import { APIURL } from "../src/helpers/environment";
 
 type LoginProps = {
   updateToken: any;
@@ -61,7 +62,7 @@ class Login extends React.Component<LoginProps, LoginState> {
 
   handleSubmit = (e: any) => {
     e.preventDefault();
-    // const url = `http://localhost:3000/user/register`;
+    // const url = `${APIURL}/user/register`;
     const body = {
       user: {
         email: this.state.email,
@@ -69,7 +70,7 @@ class Login extends React.Component<LoginProps, LoginState> {
       },
     };
 
-    fetch(`http://localhost:3000/user/login`, {
+    fetch(`${APIURL}/user/login`, {
       method: "POST",
       headers: new Headers({
         "Content-Type": "application/json",

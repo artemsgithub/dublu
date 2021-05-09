@@ -11,6 +11,7 @@ import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import NumberFormat from 'react-number-format';
 import { CSSProperties } from 'react';
+import { APIURL } from '../src/helpers/environment';
 
 interface EditListingProps {
   propertyAddress: string
@@ -78,7 +79,7 @@ handleSubmit = (id: number) => {
     estIncome: parseInt((this.state.estIncome).split(',').join(''),10),
   }};
 
-  fetch(`http://localhost:3000/listings/edit/${this.props.id}`, {
+  fetch(`${APIURL}/listings/edit/${this.props.id}`, {
     method: "PUT",
     headers: new Headers({
       "Content-Type": "application/json",

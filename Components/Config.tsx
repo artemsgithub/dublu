@@ -9,6 +9,7 @@ import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
+import { APIURL } from '../src/helpers/environment';
 
 interface AddConfigProps {
     open: boolean
@@ -58,7 +59,7 @@ export class Config extends Component <AddConfigProps, ConfigState> {
     }};
 
 
-    fetch(`http://localhost:3000/configs/edit/`, {
+    fetch(`${APIURL}/configs/edit/`, {
       method: "PUT",
       headers: new Headers({
         "Content-Type": "application/json",

@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import LogoLarge from '../Assets/LogoLarge'
 import { withRouter } from 'react-router-dom'
+import { APIURL } from "../src/helpers/environment";
 
 
 
@@ -53,7 +54,7 @@ type RegisterState = {
       password: this.state.password,
     }};
 
-    fetch(`http://localhost:3000/user/register`, {
+    fetch(`${APIURL}/user/register`, {
       method: "POST",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -76,7 +77,7 @@ type RegisterState = {
       insuranceRate: .0125,
       
     }};
-    fetch(`http://localhost:3000/configs/createconfig`, {
+    fetch(`${APIURL}/configs/createconfig`, {
       method: "POST",
       headers: new Headers({
         "Content-Type": "application/json",

@@ -14,6 +14,7 @@ import Card from '@material-ui/core/Card'
 
 
 import { Listing } from '../Components/Listing'
+import { APIURL } from "../src/helpers/environment";
 
 
 interface ViewLisitngsProps {
@@ -45,7 +46,7 @@ export class ViewListings extends Component<
 
 
   displayMine = () => {
-    fetch("http://localhost:3000/listings/mine/", {
+    fetch(`${APIURL}/listings/mine/`, {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",
@@ -61,7 +62,7 @@ export class ViewListings extends Component<
   };
 
   fetchConfigs = () => {
-    fetch("http://localhost:3000/configs/myConfigs/", {
+    fetch(`${APIURL}/configs/myConfigs/`, {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json",

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { APIURL } from '../src/helpers/environment';
 
 
 type AdminState = {
@@ -24,7 +25,7 @@ export default class Admin extends Component <AdminProps, AdminState> {
     }
 
     displayUsers = () => {
-        fetch("http://localhost:3000/admin/all-users", {
+        fetch(`${APIURL}/admin/all-users`, {
           method: "GET",
           headers: new Headers({
             "Content-Type": "application/json",

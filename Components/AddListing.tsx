@@ -15,7 +15,7 @@ import Alert from '@material-ui/lab/Alert';
 // number format 
 import NumberFormat from 'react-number-format';
 import { CSSProperties } from "@material-ui/styles";
-
+import { APIURL } from '../src/helpers/environment'
 
 interface AddListingProps {
   open: boolean;
@@ -88,7 +88,7 @@ handleSubmit = (event: any) => {
     estIncome: parseInt((this.state.estIncome).split(',').join(''),10),
   }};
 
-  fetch(`http://localhost:3000/listings/create`, {
+  fetch(`${APIURL}/listings/create`, {
     method: "POST",
     headers: new Headers({
       "Content-Type": "application/json",

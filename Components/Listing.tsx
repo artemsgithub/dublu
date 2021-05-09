@@ -32,6 +32,7 @@ import Meter from '../Components/Meter'
 
 // @ts-ignore 
 import * as formulajs from '@formulajs/formulajs' 
+import { APIURL } from '../src/helpers/environment';
 
 interface ListingProps { 
     listing: any
@@ -136,7 +137,7 @@ export class Listing extends Component <ListingProps, ListingState> {
 
       handleDelete = (id: number) => {
         
-        fetch(`http://localhost:3000/listings/delete/${this.props.listing.id}`, {
+        fetch(`${APIURL}/listings/delete/${this.props.listing.id}`, {
           method: 'DELETE',
           headers: new Headers({
             'Content-Type': 'application/json',
