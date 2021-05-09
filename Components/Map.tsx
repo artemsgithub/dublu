@@ -31,7 +31,7 @@ export default class Map extends Component <MapProps, MapState> {
     Geocode.setApiKey("AIzaSyALtJXluvEpi-4NZWvA1Hdbt8G7m0Wi6J4");
     Geocode.setLanguage("en");
     Geocode.setRegion("us");
-  
+  // change to commit
     const response = await Geocode.fromAddress(this.props.propertyAddress);
     const { lat, lng } = response.results[0].geometry.location;
     console.log(lat, lng);
