@@ -7,7 +7,7 @@ import Login from "../Components/Login";
 import Register from "../Components/Register";
 import Dashboard from "../Components/Dashboard";
 import Protector from "../Components/Protector";
-
+import Admin from "../Components/Admin"
 
 type setState = {
   sessionToken: string;
@@ -58,15 +58,14 @@ class App extends Component<{}, setState> {
                 token={this.state.sessionToken}
               />
             </Route>
-            <Route exact path="/login">
-             
+            <Route exact path="/admin">
+              <Admin/> 
             </Route>
             <Protector
-              sessionToken={this.state.sessionToken}
-              exact
-              path="/dashboard"
+              exact path="/dashboard"
             >
               <Dashboard />
+            
             </Protector>
           </Switch>
         </Router>

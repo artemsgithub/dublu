@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom'
 
 type ProtectorProps = { 
     children: ReactChild  // everything passed into this key, is type Component (t.d)
-    sessionToken: string
+
 } & Record<string, any>  // any other key, any other value, just no numbers
 
 
@@ -12,20 +12,19 @@ type ProtectorProps = {
 export default class Protector extends Component<ProtectorProps>{
     
     render() {
-        const {sessionToken, children, ...rest } = this.props
-        const token = localStorage.getItem("token")
+        // spread operator ..rest => all the other keys not listed, grab them and put them into the object called rest
+        const {children, ...allTheRest } = this.props
+        const token = localStorage.getItem("token") 
         console.log(token)
-        console.log(sessionToken)
-        if (token === undefined) {
-            <Redirect to="/" />
+        if (!token) {
+           return  <Redirect to="/" />
         }
         return (
             <>
-            <Route {...rest} render={(props) => (
-                !!token 
-                  ? children
-                  : <Redirect to='/' />
-              )} />
+            {/* return the route component and then render whatever is inside the protector component */}
+            <Route {...allTheRest}>
+                {children}
+            </Route>       
             </>
         )
     }
