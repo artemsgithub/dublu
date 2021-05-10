@@ -28,7 +28,7 @@ export default class Map extends Component <MapProps, MapState> {
     }
 
   async loadGeocodeCenter() {
-    Geocode.setApiKey("AIzaSyALtJXluvEpi-4NZWvA1Hdbt8G7m0Wi6J4");
+    Geocode.setApiKey("");
     Geocode.setLanguage("en");
     Geocode.setRegion("us");
     const response = await Geocode.fromAddress(this.props.propertyAddress);
